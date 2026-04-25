@@ -137,7 +137,7 @@ export default function HeroSection() {
                 Get a Free Estimate
               </Link>
               <Link
-                to="/projects"
+                to="/services"
                 className="whitespace-nowrap bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-8 py-4 rounded-full text-base transition-all duration-200 cursor-pointer text-center"
               >
                 View Our Work

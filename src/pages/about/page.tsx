@@ -269,7 +269,7 @@ export default function AboutPage() {
                   Get a Free Estimate <i className="ri-arrow-right-line"></i>
                 </Link>
                 <Link
-                  to="/projects"
+                  to="/services"
                   className="inline-flex items-center gap-2 whitespace-nowrap border-2 border-white/20 text-white hover:border-[#2db84b] hover:text-[#2db84b] font-bold px-7 py-3 rounded-full transition-all cursor-pointer"
                 >
                   View Our Work <i className="ri-eye-line"></i>
