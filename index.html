@@ -1,45 +1,91 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/f193a6b9-6bb9-4213-b9dc-b6023822a17c_freepik_dame-este-logo-sin-las-le_2864227198-1.png?v=301a59e498fd49dee7da3a3de2911707" />
-    <link rel="apple-touch-icon" href="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/f193a6b9-6bb9-4213-b9dc-b6023822a17c_freepik_dame-este-logo-sin-las-le_2864227198-1.png?v=301a59e498fd49dee7da3a3de2911707" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Angel's Paint & Autobody | Collision Repair & Auto Paint Zebulon NC</title>
-    <meta name="description" content="Angel's Paint & Autobody — professional auto body & paint services in Zebulon, NC. Collision repair, dent removal, bumper repair, headlight restoration & paint jobs. Free estimates. (919) 532-1509." />
-    <meta name="keywords" content="auto body repair Zebulon NC, collision repair North Carolina, auto paint shop Zebulon" />
-    <meta name="geo.region" content="US-NC" />
-    <meta name="geo.placename" content="Zebulon, North Carolina" />
-    <meta name="geo.position" content="35.8232;-78.3121" />
-    
-    
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Angel&#39;s Paint &amp; Autobody | Auto Body &amp; Paint Zebulon NC" />
-  <meta property="og:description" content="Professional auto body &amp; paint services in Zebulon, NC. Collision repair, dent removal, bumper repair, headlight restoration. Free estimates. (919) 532-1509." />
-  <meta property="og:image" content="https://static.readdy.ai/image/3ce9d24c92e6c33dbaca65a0380531ab/37eb2a618d370b3204275474e610d73f.jpeg?ogv=tn5du1" />
-  <meta property="og:image:alt" content="Angel&#39;s Paint &amp; Autobody | Auto Body &amp; Paint Zebulon NC" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://capdtm.readdy.co" />
-  <meta property="og:site_name" content="atlanta" />
-  <meta property="og:locale" content="es_ES" />
-  <meta property="og:type" content="website" />
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Angel&#39;s Paint &amp; Autobody | Auto Body &amp; Paint Zebulon NC" />
-  <meta name="twitter:description" content="Professional auto body &amp; paint services in Zebulon, NC. Collision repair, dent removal, bumper repair, headlight restoration. Free estimates. (919) 532-1509." />
-  <meta name="twitter:image" content="https://static.readdy.ai/image/3ce9d24c92e6c33dbaca65a0380531ab/37eb2a618d370b3204275474e610d73f.jpeg?ogv=tn5du1" />
-  <meta name="twitter:image:alt" content="Angel&#39;s Paint &amp; Autobody | Auto Body &amp; Paint Zebulon NC" />
-</head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+const LOGO = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { label: 'HOME', path: '/' },
+    { label: 'ABOUT US', path: '/about' },
+    { label: 'SERVICES', path: '/services' },
+    { label: 'CONTACT', path: '/contact' },
+  ];
+
+  return (
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0d0d0d] shadow-lg' : 'bg-[#0d0d0d]'}`}>
+      <div className="w-full">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between h-28">
+          <Link to="/" className="flex items-center cursor-pointer">
+            <img
+              alt="Angel's Paint & Autobody"
+              className="h-20 w-auto object-contain rounded-lg"
+              src={LOGO}
+            />
+          </Link>
+
+          <nav className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`text-lg font-bold tracking-wider whitespace-nowrap transition-colors duration-200 ${
+                  location.pathname === link.path ? 'text-[#2db84b]' : 'text-white hover:text-[#2db84b]'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <a
+            href="tel:+19195321509"
+            className="hidden md:flex items-center gap-2 whitespace-nowrap bg-[#2db84b] hover:bg-[#25a040] text-white text-lg font-bold px-7 py-3.5 rounded-full transition-colors duration-200 cursor-pointer"
+          >
+            <i className="ri-phone-line"></i> (919) 532-1509
+          </a>
+
+          <button
+            className="md:hidden w-10 h-10 flex items-center justify-center cursor-pointer text-white"
+            aria-label="Toggle menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <i className={`text-2xl ${menuOpen ? 'ri-close-line' : 'ri-menu-line'}`}></i>
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <div className="md:hidden bg-[#0d0d0d] border-t border-white/10 px-4 py-4 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setMenuOpen(false)}
+              className={`text-base font-bold tracking-wider whitespace-nowrap transition-colors duration-200 ${
+                location.pathname === link.path ? 'text-[#2db84b]' : 'text-white hover:text-[#2db84b]'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <a
+            href="tel:+19195321509"
+            className="whitespace-nowrap bg-[#2db84b] hover:bg-[#25a040] text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors duration-200 cursor-pointer text-center flex items-center justify-center gap-2"
+          >
+            <i className="ri-phone-line"></i> (919) 532-1509
+          </a>
+        </div>
+      )}
+    </header>
+  );
+}

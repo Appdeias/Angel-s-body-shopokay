@@ -1,7 +1,31 @@
-/// <reference types="vite/client" />
+import type { RouteObject } from "react-router-dom";
+import NotFound from "../pages/NotFound";
+import Home from "../pages/home/page";
+import About from "../pages/about/page";
+import Services from "../pages/services/page";
+import Contact from "../pages/contact/page";
 
-declare const __BASE_PATH__: string;
-declare const __IS_PREVIEW__: boolean;
-declare const __READDY_PROJECT_ID__: string;
-declare const __READDY_VERSION_ID__: string;
-declare const __READDY_AI_DOMAIN__: string;
+const routes: RouteObject[] = [
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/services",
+    element: <Services />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+];
+
+export default routes;
