@@ -1,29 +1,38 @@
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import StatsBar from './components/StatsBar';
-import AboutSection from './components/AboutSection';
-import FreeConsultationBanner from './components/FreeConsultationBanner';
-import ServicesSection from './components/ServicesSection';
-import PerformanceSection from './components/PerformanceSection';
-import HowItWorksSection from './components/HowItWorksSection';
-import CTASection from './components/CTASection';
-import Footer from './components/Footer';
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
 
-export default function Home() {
-  return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <StatsBar />
-        <AboutSection />
-        <FreeConsultationBanner />
-        <ServicesSection />
-        <PerformanceSection />
-        <HowItWorksSection />
-        <CTASection />
-      </main>
-      <Footer />
-    </div>
-  );
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "useUnknownInCatchVariables": false,
+    "alwaysStrict": false,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedSideEffectImports": false,
+    "paths": {
+      "@/*": ["./src/*"],
+    }
+  },
+  "include": ["src", "vite-env.d.ts"]
 }

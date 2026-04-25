@@ -162,7 +162,7 @@ export default function HeroSection() {
             <div className="bg-[#0d0d0d]/90 backdrop-blur-sm border border-[#2db84b]/30 rounded-2xl p-8">
               <div className="mb-6 pb-5 border-b border-white/10">
                 <h2 className="text-white text-2xl font-extrabold leading-snug">
-                  Get Your Free <span className="text-[#2db84b]">Estimate</span> Today
+                  Get Your Free <span className="text-[#2db84b]">Estimate</span> Today <span className="text-yellow-400">👇</span>
                 </h2>
                 <p className="text-gray-400 text-sm mt-1">No obligation — we&apos;ll call you back fast</p>
               </div>
