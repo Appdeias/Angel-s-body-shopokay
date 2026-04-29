@@ -163,7 +163,7 @@ export default function ServicesPage() {
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0">
             <img
-              alt="Request a free auto body estimate Angel's Paint & Autobody"
+              alt="Request an auto body estimate Angel's Paint & Autobody"
               className="w-full h-full object-cover object-top"
               src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345"
             />
@@ -171,7 +171,7 @@ export default function ServicesPage() {
           </div>
           <div className="relative z-10 max-w-xl mx-auto px-4 md:px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-snug">
-              Request A Free Auto Body Estimate
+              Get Your Auto Body Estimate Today
             </h2>
             <p className="text-gray-300 mt-4 text-sm leading-relaxed">
               Get personalized advice from our auto body specialists with no obligation. Let&apos;s discuss your vehicle repair today.
@@ -213,13 +213,13 @@ export default function ServicesPage() {
                 Ready to Restore Your Vehicle?<br /><span className="text-[#2db84b]">Let&apos;s Get Started.</span>
               </h2>
               <p className="text-gray-300 mt-4 text-sm leading-relaxed">
-                Your vehicle deserves to look like new. Whether you need a dent removed, a bumper repaired, or a full collision restoration — our team is ready. Get your free estimate today.
+                Your vehicle deserves to look like new. Whether you need a dent removed, a bumper repaired, or a full collision restoration — our team is ready. Get your estimate today.
               </p>
               <Link
                 to="/contact"
                 className="whitespace-nowrap inline-flex items-center gap-2 bg-[#2db84b] hover:bg-[#25a040] text-white font-bold px-8 py-3.5 rounded-full mt-7 transition-all cursor-pointer text-sm"
               >
-                Get a Free Estimate <i className="ri-arrow-right-line"></i>
+                Get Your Estimate Today <i className="ri-arrow-right-line"></i>
               </Link>
             </div>
           </div>

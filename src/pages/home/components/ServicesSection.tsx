@@ -35,7 +35,7 @@ export default function ServicesSection() {
               Professional Auto Body &amp; Paint Services You Can Trust
             </h2>
             <p className="text-gray-400 mt-4 text-sm leading-relaxed max-w-sm">
-              From minor dents to major collision damage, we restore every vehicle with precision and care. Every job starts with a free estimate and ends with a result that speaks for itself.
+              From minor dents to major collision damage, we restore every vehicle with precision and care. Every job starts with a detailed estimate and ends with a result that speaks for itself.
             </p>
             <div className="inline-flex items-center gap-3 bg-[#1a1a1a] border border-[#2db84b]/30 text-white px-6 py-3.5 rounded-xl mt-7">
               <i className="ri-emotion-happy-line text-[#2db84b] text-xl"></i>
@@ -73,7 +73,7 @@ export default function ServicesSection() {
                   <i className="ri-file-list-3-line text-[#2db84b] text-base"></i>
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-xs leading-tight">Free Estimate</h4>
+                  <h4 className="text-white font-bold text-xs leading-tight">Get Your Estimate</h4>
                   <p className="text-gray-400 text-[11px] mt-0.5 leading-relaxed">
                     Get a detailed, no-obligation quote for your vehicle repair so you can plan with confidence.
                   </p>

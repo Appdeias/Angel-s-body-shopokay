@@ -20,9 +20,9 @@ const faqs = [
       'Yes! We work with most major insurance companies and can help coordinate the claims process for you. We handle the paperwork and communication so you can focus on getting back on the road.',
   },
   {
-    question: 'Do you offer free estimates?',
+    question: 'How do I get an estimate?',
     answer:
-      'Absolutely. We offer completely free, no-obligation estimates. Bring your vehicle in or call us at (919) 532-1509 and we\'ll assess the damage and provide a detailed quote.',
+      'Easy — just bring your vehicle in or call us at (919) 532-1509 and we\'ll assess the damage and provide a detailed quote. No pressure, no commitment.',
   },
   {
     question: 'Do you serve Spanish-speaking customers?',
@@ -143,7 +143,7 @@ export default function AboutPage() {
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0">
             <img
-              alt="Free auto body estimate Angel's Paint & Autobody"
+              alt="Auto body estimate Angel's Paint & Autobody"
               className="w-full h-full object-cover object-center"
               src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785"
             />
@@ -151,7 +151,7 @@ export default function AboutPage() {
           </div>
           <div className="relative max-w-4xl mx-auto px-4 md:px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-              Request A Free Auto Body Estimate
+              Get Your Auto Body Estimate Today
             </h2>
             <p className="text-gray-300 mt-4 text-base max-w-xl mx-auto">
               Get personalized advice from our auto body specialists with no obligation. Let&apos;s discuss your vehicle repair today.
@@ -266,7 +266,7 @@ export default function AboutPage() {
                   to="/contact"
                   className="inline-flex items-center gap-2 whitespace-nowrap bg-[#2db84b] hover:bg-[#25a040] text-white font-bold px-7 py-3 rounded-full transition-all cursor-pointer hover:scale-105"
                 >
-                  Get a Free Estimate <i className="ri-arrow-right-line"></i>
+                  Get Your Estimate Today <i className="ri-arrow-right-line"></i>
                 </Link>
                 <Link
                   to="/services"

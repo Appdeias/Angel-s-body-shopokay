@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const features = [
   { icon: 'ri-shield-check-line', label: 'Licensed & Insured' },
   { icon: 'ri-translate-2', label: 'Bilingual Team (English / Spanish)' },
-  { icon: 'ri-price-tag-3-line', label: 'Free Estimates' },
+  { icon: 'ri-price-tag-3-line', label: 'Honest Estimates' },
   { icon: 'ri-car-line', label: 'All Makes & Models' },
 ];
 
@@ -36,7 +36,7 @@ export default function AboutSection() {
               Angel&apos;s Paint &amp; Autobody is a family-owned auto body shop with over 20 years of experience restoring vehicles to their pre-accident condition. Located in Zebulon, North Carolina, we specialize in collision repair, dent removal, bumper repair, professional paint jobs, and headlight restoration.
             </p>
             <p className="text-gray-400 mt-3 text-base leading-relaxed">
-              Our bilingual team (English &amp; Spanish) is committed to delivering exceptional results with honest pricing and attention to every detail. We work with most insurance companies and guide you through the entire process — from the free estimate to the final delivery.
+              Our bilingual team (English &amp; Spanish) is committed to delivering exceptional results with honest pricing and attention to every detail. We work with most insurance companies and guide you through the entire process — from your estimate to the final delivery.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">

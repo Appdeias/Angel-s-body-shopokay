@@ -17,14 +17,14 @@ export default function CTASection() {
           Let&apos;s Make It Look <span className="text-[#2db84b]">Like New Again</span>
         </h2>
         <p className="text-gray-300 mt-5 text-lg leading-relaxed">
-          From a small dent to a full collision repair — we&apos;re here to make it happen. Contact us today for a free, no-obligation estimate.
+          From a small dent to a full collision repair — we&apos;re here to make it happen. Contact us today and get your estimate.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <Link
             to="/contact"
             className="whitespace-nowrap bg-[#2db84b] hover:bg-[#25a040] text-white font-bold px-10 py-4 rounded-full text-base transition-colors cursor-pointer"
           >
-            Get a Free Estimate
+            Get Your Estimate Today
           </Link>
           <a
             href="tel:+19195321509"

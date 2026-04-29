@@ -134,7 +134,7 @@ export default function HeroSection() {
                 to="/contact"
                 className="whitespace-nowrap bg-[#2db84b] hover:bg-[#25a040] text-white font-bold px-8 py-4 rounded-full text-base transition-all duration-200 cursor-pointer text-center"
               >
-                Get a Free Estimate
+                Get Your Estimate Today
               </Link>
               <Link
                 to="/services"
@@ -162,7 +162,7 @@ export default function HeroSection() {
             <div className="bg-[#0d0d0d]/90 backdrop-blur-sm border border-[#2db84b]/30 rounded-2xl p-8">
               <div className="mb-6 pb-5 border-b border-white/10">
                 <h2 className="text-white text-2xl font-extrabold leading-snug">
-                  Get Your Free <span className="text-[#2db84b]">Estimate</span> Today <span className="text-yellow-400">👇</span>
+                  Get Your <span className="text-[#2db84b]">Estimate</span> Today <span className="text-yellow-400">👇</span>
                 </h2>
                 <p className="text-gray-400 text-sm mt-1">No obligation — we&apos;ll call you back fast</p>
               </div>
@@ -173,7 +173,7 @@ export default function HeroSection() {
                     <i className="ri-checkbox-circle-line text-[#2db84b] text-3xl"></i>
                   </div>
                   <p className="text-white font-bold text-lg">Thank you!</p>
-                  <p className="text-gray-400 text-sm mt-2">We&apos;ll contact you shortly to schedule your free estimate.</p>
+                  <p className="text-gray-400 text-sm mt-2">We&apos;ll contact you shortly to schedule your estimate.</p>
                   <button
                     onClick={() => setSubmitStatus('idle')}
                     className="mt-6 text-[#2db84b] text-sm underline cursor-pointer"
@@ -245,7 +245,7 @@ export default function HeroSection() {
                     className="whitespace-nowrap w-full bg-[#2db84b] hover:bg-[#25a040] disabled:opacity-60 text-white font-bold py-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer mt-1"
                   >
                     <i className="ri-send-plane-line text-base"></i>
-                    {submitStatus === 'loading' ? 'Sending...' : 'Request Free Estimate'}
+                    {submitStatus === 'loading' ? 'Sending...' : 'Request Your Estimate'}
                   </button>
                 </form>
               )}

@@ -1,7 +1,7 @@
 const steps = [
   {
     icon: 'ri-customer-service-2-line',
-    title: 'Free Estimate',
+    title: 'Get Your Estimate',
     desc: 'Bring your vehicle in or call us. We assess the damage, listen to your needs, and provide a detailed, no-obligation estimate.',
   },
   {

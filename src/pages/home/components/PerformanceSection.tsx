@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+const CLIENT_VIDEO_URL = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7d1896c7-1fc8-458b-93d6-aa39402109ba_4324242.mp4?v=a02ffddf69245d7acd59cd30ac1e6927';
+
 const bars = [
   { label: 'Customer Satisfaction Rate', value: 99, display: '99%' },
   { label: 'Paint Quality Standards', value: 100, display: '100%' },
@@ -9,7 +11,10 @@ const bars = [
 
 export default function PerformanceSection() {
   const [animated, setAnimated] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showControls, setShowControls] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,15 +30,58 @@ export default function PerformanceSection() {
     return () => observer.disconnect();
   }, []);
 
+  const handlePlayPause = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <section className="overflow-hidden" ref={sectionRef}>
       <div className="flex flex-col lg:flex-row min-h-[520px]">
-        <div className="w-full lg:w-1/2 min-h-[340px] lg:min-h-[520px]">
-          <img
-            alt="Angel's Paint & Autobody professional auto body craftsmanship Zebulon NC"
+        <div
+          className="relative w-full lg:w-1/2 min-h-[340px] lg:min-h-[520px] bg-black flex items-center justify-center cursor-pointer group"
+          onMouseEnter={() => setShowControls(true)}
+          onMouseLeave={() => setShowControls(false)}
+          onClick={handlePlayPause}
+        >
+          <video
+            ref={videoRef}
+            src={CLIENT_VIDEO_URL}
             className="w-full h-full object-cover object-center"
-            src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345"
+            playsInline
+            onEnded={() => setIsPlaying(false)}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
           />
+          {/* Play/Pause overlay */}
+          <div
+            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+              !isPlaying || showControls ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="absolute inset-0 bg-black/30"></div>
+            <button
+              className="relative z-10 w-20 h-20 flex items-center justify-center bg-[#2db84b] hover:bg-[#25a040] rounded-full transition-all duration-200 cursor-pointer"
+              aria-label={isPlaying ? 'Pause video' : 'Play video'}
+              onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
+            >
+              <i className={`${isPlaying ? 'ri-pause-fill' : 'ri-play-fill'} text-white text-4xl ml-${isPlaying ? '0' : '1'}`}></i>
+            </button>
+          </div>
+          {/* Label */}
+          {!isPlaying && (
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10">
+              <span className="bg-black/60 text-white text-xs font-semibold px-4 py-1.5 rounded-full tracking-wide">
+                Real Work — Angel&apos;s Paint &amp; Autobody
+              </span>
+            </div>
+          )}
         </div>
         <div className="w-full lg:w-1/2 bg-[#0d0d0d] flex flex-col justify-center px-8 md:px-16 py-14">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#2db84b] border border-[#2db84b]/40 rounded-full px-4 py-1 mb-5 w-fit">
