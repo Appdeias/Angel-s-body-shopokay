@@ -1,91 +1,101 @@
 import { Link } from 'react-router-dom';
 import Navbar from '@/pages/home/components/Navbar';
 import Footer from '@/pages/home/components/Footer';
+import { useSiteData } from '@/hooks/useSiteData';
 
-const servicesTop = [
+const fallbackServices = [
   {
     title: 'Collision Repair',
     icon: 'ri-car-line',
     description: 'Complete collision and accident repair — structural restoration, panel replacement, chassis alignment, and full vehicle reconstruction back to pre-accident condition.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7cdab340-3876-4225-9a64-2193c2721fc9_freepik_camera-orbits-around-and-_2820358579.mp4?v=bc541642eb95bb92648aa233a32faf68',
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7cdab340-3876-4225-9a64-2193c2721fc9_freepik_camera-orbits-around-and-_2820358579.mp4?v=bc541642eb95bb92648aa233a32faf68',
+    is_active: true,
   },
   {
     title: 'Dent Removal',
     icon: 'ri-hammer-line',
-    description: 'Expert dent and abolladura removal for all types of damage — from minor dings to major dents. We restore your vehicle\'s body to its original smooth finish.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/45855254-0e5a-4675-9593-11d17a86bf94_freepik_camera-orbits-around-and-_2820358703.mp4?v=7cde472ed4a6156f4e7a4925fcd72296',
+    description: "Expert dent and abolladura removal for all types of damage — from minor dings to major dents. We restore your vehicle's body to its original smooth finish.",
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/45855254-0e5a-4675-9593-11d17a86bf94_freepik_camera-orbits-around-and-_2820358703.mp4?v=7cde472ed4a6156f4e7a4925fcd72296',
+    is_active: true,
   },
   {
     title: 'Bumper Repair',
     icon: 'ri-shield-line',
     description: 'Professional bumper repair and replacement for front and rear bumpers. We restore cracked, dented, or scratched bumpers to factory condition.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/ccdfcd3f-40de-42b6-8a3d-d9462bac3f0c_freepik_camera-orbits-around-and-_2820339219.mp4?v=02f62e0c92a16b015201b27e502a266b',
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/ccdfcd3f-40de-42b6-8a3d-d9462bac3f0c_freepik_camera-orbits-around-and-_2820339219.mp4?v=02f62e0c92a16b015201b27e502a266b',
+    is_active: true,
   },
   {
     title: 'Full Paint Job',
     icon: 'ri-paint-brush-line',
     description: 'Complete vehicle paint jobs with perfect color matching, flawless clear coat application, and a professional finish that lasts for years.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/d8b81372-fec2-4d73-88f7-09bcc0f15ee6_freepik_camera-orbits-around-and-_2820339083.mp4?v=6aa85fd325eed65d0bee4fd98b5444df',
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/d8b81372-fec2-4d73-88f7-09bcc0f15ee6_freepik_camera-orbits-around-and-_2820339083.mp4?v=6aa85fd325eed65d0bee4fd98b5444df',
+    is_active: true,
   },
   {
     title: 'Spot Paint Repair',
     icon: 'ri-focus-3-line',
-    description: 'Precise spot paint repair for scratches, chips, and small damaged areas. We match your vehicle\'s exact color for a seamless, invisible repair.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7edd9e06-3034-46b0-8ad1-f0c3c875a534_freepik_camera-orbits-around-and-_2820338995.mp4?v=19cb6a3ecd2c106b8ea5e4c3df5853f7',
+    description: "Precise spot paint repair for scratches, chips, and small damaged areas. We match your vehicle's exact color for a seamless, invisible repair.",
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7edd9e06-3034-46b0-8ad1-f0c3c875a534_freepik_camera-orbits-around-and-_2820338995.mp4?v=19cb6a3ecd2c106b8ea5e4c3df5853f7',
+    is_active: true,
   },
   {
     title: 'Headlight Restoration',
     icon: 'ri-flashlight-line',
-    description: 'Professional headlight restoration to remove yellowing, cloudiness, and oxidation — restoring clarity and improving your vehicle\'s safety and appearance.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/3c7580fd-3313-4d31-bff9-82974a2e929f_freepik_camera-orbits-around-and-_2820309600.mp4?v=8d0f6593a92419462d3deff790155eab',
+    description: "Professional headlight restoration to remove yellowing, cloudiness, and oxidation — restoring clarity and improving your vehicle's safety and appearance.",
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/3c7580fd-3313-4d31-bff9-82974a2e929f_freepik_camera-orbits-around-and-_2820309600.mp4?v=8d0f6593a92419462d3deff790155eab',
+    is_active: true,
   },
-];
-
-const servicesBottom = [
   {
     title: 'Rim Painting',
     icon: 'ri-circle-line',
     description: 'Custom rim painting and refinishing to give your wheels a fresh, professional look. Available in any color to match or complement your vehicle.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/efb48df9-67ba-47be-a24f-9e5d1be8e66c_freepik_camera-orbits-around-and-_2820300955.mp4?v=1296e5f3d445374c6a6576ef79fbaad8',
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/efb48df9-67ba-47be-a24f-9e5d1be8e66c_freepik_camera-orbits-around-and-_2820300955.mp4?v=1296e5f3d445374c6a6576ef79fbaad8',
+    is_active: true,
   },
   {
     title: 'Clear Coat Application',
     icon: 'ri-drop-line',
-    description: 'Professional clear coat application for maximum paint protection, UV resistance, and a deep, glossy finish that protects your vehicle\'s paint for years.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/c201e19a-8b63-491f-ba0e-55465d168274_freepik_camera-orbits-around-and-_2820389341.mp4?v=9e06c4fd164c233e2271c4f3f6ea53b3',
+    description: "Professional clear coat application for maximum paint protection, UV resistance, and a deep, glossy finish that protects your vehicle's paint for years.",
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/c201e19a-8b63-491f-ba0e-55465d168274_freepik_camera-orbits-around-and-_2820389341.mp4?v=9e06c4fd164c233e2271c4f3f6ea53b3',
+    is_active: true,
   },
   {
     title: 'Structural Repair',
     icon: 'ri-building-line',
-    description: 'Expert auto body framework and structural repair after major accidents. We restore your vehicle\'s structural integrity to ensure safety and proper alignment.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/98f39d57-b68c-4614-b85a-fb3d0d2be466_freepik_camera-orbits-around-and-_2820389304.mp4?v=c03c3fc07a938ced0c37709d1597a13c',
+    description: "Expert auto body framework and structural repair after major accidents. We restore your vehicle's structural integrity to ensure safety and proper alignment.",
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/98f39d57-b68c-4614-b85a-fb3d0d2be466_freepik_camera-orbits-around-and-_2820389304.mp4?v=c03c3fc07a938ced0c37709d1597a13c',
+    is_active: true,
   },
   {
     title: 'Panel Replacement',
     icon: 'ri-layout-2-line',
     description: 'Professional panel replacement for severely damaged body panels. We source quality parts and ensure a perfect fit and finish for every replacement.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/4760845e-097a-4aec-ba4f-8cdd57ecc8f5_freepik_camera-orbits-around-and-_2820368723-1.mp4?v=cd296f9ce143e03fef65daf56df95f9b',
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/4760845e-097a-4aec-ba4f-8cdd57ecc8f5_freepik_camera-orbits-around-and-_2820368723-1.mp4?v=cd296f9ce143e03fef65daf56df95f9b',
+    is_active: true,
   },
   {
     title: 'Color Matching',
     icon: 'ri-palette-line',
-    description: 'Advanced color matching technology to perfectly replicate your vehicle\'s original paint color — ensuring a seamless, factory-quality finish every time.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/39308d08-3b9f-43e6-8a58-84ade72d0d18_freepik_camera-orbits-around-and-_2820379161.mp4?v=e38dcbc6d5d92e12994a8eda9ace80c3',
+    description: "Advanced color matching technology to perfectly replicate your vehicle's original paint color — ensuring a seamless, factory-quality finish every time.",
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/39308d08-3b9f-43e6-8a58-84ade72d0d18_freepik_camera-orbits-around-and-_2820379161.mp4?v=e38dcbc6d5d92e12994a8eda9ace80c3',
+    is_active: true,
   },
   {
     title: 'Full Vehicle Restoration',
     icon: 'ri-car-washing-line',
     description: 'Complete vehicle restoration from accident damage back to pre-accident condition. We handle everything — structure, body, paint, and final detailing.',
-    video: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/384621d5-0ace-42bb-8f97-6c3dc88ac265_freepik_camera-orbits-around-and-_2820389396.mp4?v=041934cbc9cd6761e33ea7c012882ed5',
+    video_url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/384621d5-0ace-42bb-8f97-6c3dc88ac265_freepik_camera-orbits-around-and-_2820389396.mp4?v=041934cbc9cd6761e33ea7c012882ed5',
+    is_active: true,
   },
 ];
 
-function ServiceCard({ title, icon, description, video }: { title: string; icon: string; description: string; video: string }) {
+function ServiceCard({ title, icon, description, video_url }: { title: string; icon: string; description: string; video_url: string }) {
   return (
     <div className="group relative bg-[#1a1a1a] rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[#2db84b]/50 transition-all duration-300">
       <div className="w-full h-52 overflow-hidden relative">
         <video
-          src={video}
+          src={video_url}
           autoPlay
           muted
           loop
@@ -114,6 +124,24 @@ function ServiceCard({ title, icon, description, video }: { title: string; icon:
 }
 
 export default function ServicesPage() {
+  const { services: dbServices } = useSiteData();
+  const services = dbServices.length > 0
+    ? dbServices.filter((s) => s.is_active).map((s) => ({
+        title: s.title,
+        icon: s.icon,
+        description: s.description,
+        video_url: s.video_url,
+      }))
+    : fallbackServices.filter((s) => s.is_active).map((s) => ({
+        title: s.title,
+        icon: s.icon,
+        description: s.description,
+        video_url: s.video_url,
+      }));
+
+  const topHalf = services.slice(0, Math.ceil(services.length / 2));
+  const bottomHalf = services.slice(Math.ceil(services.length / 2));
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -152,7 +180,7 @@ export default function ServicesPage() {
         <section className="pt-16 pb-10 bg-[#111111]">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {servicesTop.map((s) => (
+              {topHalf.map((s) => (
                 <ServiceCard key={s.title} {...s} />
               ))}
             </div>
@@ -189,7 +217,7 @@ export default function ServicesPage() {
         <section className="pt-10 pb-16 bg-[#111111]">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {servicesBottom.map((s) => (
+              {bottomHalf.map((s) => (
                 <ServiceCard key={s.title} {...s} />
               ))}
             </div>

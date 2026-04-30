@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useSiteData } from '@/hooks/useSiteData';
 
 const features = [
   { icon: 'ri-shield-check-line', label: 'Licensed & Insured' },
@@ -8,6 +9,8 @@ const features = [
 ];
 
 export default function AboutSection() {
+  const { settings } = useSiteData();
+
   return (
     <section className="py-20 bg-[#111111] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -28,15 +31,15 @@ export default function AboutSection() {
           </div>
 
           <div className="w-full lg:w-[52%]">
-            <span className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest">About Us</span>
+            <span className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest">{settings.about_section_subtitle || 'About Us'}</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-3 leading-tight">
-              Zebulon&apos;s Trusted Auto Body &amp; Paint Specialists
+              {settings.about_section_title || "Zebulon's Trusted Auto Body & Paint Specialists"}
             </h2>
             <p className="text-gray-400 mt-5 text-base leading-relaxed">
-              Angel&apos;s Paint &amp; Autobody is a family-owned auto body shop with over 20 years of experience restoring vehicles to their pre-accident condition. Located in Zebulon, North Carolina, we specialize in collision repair, dent removal, bumper repair, professional paint jobs, and headlight restoration.
+              {settings.about_body_1 || "Angel's Paint & Autobody is a family-owned auto body shop with over 20 years of experience restoring vehicles to their pre-accident condition. Located in Zebulon, North Carolina, we specialize in collision repair, dent removal, bumper repair, professional paint jobs, and headlight restoration."}
             </p>
             <p className="text-gray-400 mt-3 text-base leading-relaxed">
-              Our bilingual team (English &amp; Spanish) is committed to delivering exceptional results with honest pricing and attention to every detail. We work with most insurance companies and guide you through the entire process — from your estimate to the final delivery.
+              {settings.about_body_2 || 'Our bilingual team (English & Spanish) is committed to delivering exceptional results with honest pricing and attention to every detail. We work with most insurance companies and guide you through the entire process — from your estimate to the final delivery.'}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">

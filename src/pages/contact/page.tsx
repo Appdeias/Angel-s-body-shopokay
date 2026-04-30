@@ -1,11 +1,13 @@
 import { useState, useRef } from 'react';
 import Navbar from '@/pages/home/components/Navbar';
 import Footer from '@/pages/home/components/Footer';
+import { useSiteData } from '@/hooks/useSiteData';
 
 const LOGO = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
 const FORM_URL = 'https://readdy.ai/api/form/d7klsf767esg4j665a80';
 
 export default function ContactPage() {
+  const { settings } = useSiteData();
   const [charCount, setCharCount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -82,24 +84,24 @@ export default function ContactPage() {
         {/* Contact Info Bar */}
         <section className="w-full bg-[#1a1a1a] border-t-4 border-[#2db84b]">
           <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/20">
-            <a href="tel:+19195321509" className="group flex items-center gap-5 px-8 py-7 cursor-pointer hover:bg-white/10 transition-colors">
+            <a href={`tel:+1${settings.contact_phone_1?.replace(/\D/g, '') || '19195324509'}`} className="group flex items-center gap-5 px-8 py-7 cursor-pointer hover:bg-white/10 transition-colors">
               <div className="w-12 h-12 flex items-center justify-center bg-white/20 rounded-full shrink-0 group-hover:bg-[#e8b84b] transition-all duration-300">
                 <i className="ri-phone-fill text-white group-hover:text-[#111111] text-xl transition-colors duration-300"></i>
               </div>
               <div>
                 <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest">Call Us Directly</p>
-                <p className="text-white font-bold text-base mt-0.5">(919) 532-1509</p>
-                <p className="text-white font-bold text-sm mt-0.5">(919) 375-4899</p>
-                <p className="text-white/70 text-xs mt-0.5">English &amp; Spanish spoken</p>
+                <p className="text-white font-bold text-base mt-0.5">{settings.contact_phone_1 || '(919) 532-4509'}</p>
+                <p className="text-white font-bold text-sm mt-0.5">{settings.contact_phone_2 || '(919) 375-4899'}</p>
+                <p className="text-white/70 text-xs mt-0.5">{settings.contact_bilingual_note || 'English & Spanish spoken'}</p>
               </div>
             </a>
-            <a href="mailto:rivera8405@gmail.com" className="group flex items-center gap-5 px-8 py-7 cursor-pointer hover:bg-white/10 transition-colors">
+            <a href={`mailto:${settings.contact_email || 'rivera8405@gmail.com'}`} className="group flex items-center gap-5 px-8 py-7 cursor-pointer hover:bg-white/10 transition-colors">
               <div className="w-12 h-12 flex items-center justify-center bg-white/20 rounded-full shrink-0 group-hover:bg-[#e8b84b] transition-all duration-300">
                 <i className="ri-mail-line text-white group-hover:text-[#111111] text-xl transition-colors duration-300"></i>
               </div>
               <div>
                 <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest">Email Us</p>
-                <p className="text-white font-bold text-sm mt-0.5">rivera8405@gmail.com</p>
+                <p className="text-white font-bold text-sm mt-0.5">{settings.contact_email || 'rivera8405@gmail.com'}</p>
               </div>
             </a>
             <a href="https://www.instagram.com/angelspaintauto" target="_blank" rel="nofollow noopener noreferrer" className="group flex items-center gap-5 px-8 py-7 cursor-pointer hover:bg-white/10 transition-colors">
@@ -108,7 +110,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest">Follow Us</p>
-                <p className="text-white font-bold text-sm mt-0.5">@angelspaintauto</p>
+                <p className="text-white font-bold text-sm mt-0.5">{settings.contact_instagram || '@angelspaintauto'}</p>
               </div>
             </a>
             <div className="group flex items-center gap-5 px-8 py-7">
@@ -117,7 +119,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest">Our Location</p>
-                <p className="text-white font-bold text-sm mt-0.5">1704 N Arendell Ave</p>
+                <p className="text-white font-bold text-sm mt-0.5">{settings.contact_address || '1704 N Arendell Ave, Zebulon, NC 27597'}</p>
                 <p className="text-white/70 text-xs">Zebulon, NC 27597</p>
               </div>
             </div>
@@ -146,18 +148,18 @@ export default function ContactPage() {
                     <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest mb-2">Business Hours</p>
                     <div className="flex justify-between text-white text-xs mb-1">
                       <span>Monday – Friday</span>
-                      <span className="font-semibold">8:00 AM – 6:00 PM</span>
+                      <span className="font-semibold">{settings.contact_hours_weekdays || '9:00 AM – 6:00 PM'}</span>
                     </div>
-                    <div className="flex justify-between text-white text-xs mb-1">
+                    <div className="flex justify-between text-white/50 text-xs mb-1">
                       <span>Saturday</span>
-                      <span className="font-semibold">9:00 AM – 2:00 PM</span>
+                      <span>{settings.contact_hours_saturday || 'Closed'}</span>
                     </div>
                     <div className="flex justify-between text-white/50 text-xs">
                       <span>Sunday</span>
-                      <span>Closed</span>
+                      <span>{settings.contact_hours_sunday || 'Closed'}</span>
                     </div>
                     <p className="text-[#2db84b] text-xs mt-3 flex items-center gap-1.5">
-                      <i className="ri-translate-2"></i>English &amp; Spanish spoken
+                      <i className="ri-translate-2"></i>{settings.contact_bilingual_note || 'English & Spanish spoken'}
                     </p>
                   </div>
                   <div className="mt-5 w-full bg-white/5 rounded-xl px-5 py-4 text-left">

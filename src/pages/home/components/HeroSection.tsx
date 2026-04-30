@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useSiteData } from '@/hooks/useSiteData';
 
 const heroVideos = [
   'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/68362ed4-620c-4087-9f36-29db22ec9c9f_4234324.mp4?v=51689215013bc6086565cb1f9c159b96',
@@ -14,6 +15,7 @@ const heroImages = [
 const FORM_URL = 'https://readdy.ai/api/form/d7klsf767esg4j665a7g';
 
 export default function HeroSection() {
+  const { settings } = useSiteData();
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [useVideo, setUseVideo] = useState(true);
@@ -120,27 +122,26 @@ export default function HeroSection() {
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           <div className="flex-1 w-full">
             <span className="inline-flex items-center gap-2 bg-[#2db84b]/15 border border-[#2db84b]/40 text-[#2db84b] text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
-              <i className="ri-map-pin-line"></i> Zebulon, North Carolina
+              <i className="ri-map-pin-line"></i> {settings.hero_location_badge || 'Zebulon, North Carolina'}
             </span>
             <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-              Auto Body &amp;<br />
-              <span className="text-[#2db84b]">Paint Experts.</span>
+              {settings.hero_title || "Auto Body & Paint Experts."}
             </h1>
             <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-xl">
-              Over 20 years restoring vehicles to factory condition. Collision repair, dent removal, bumper repair, headlight restoration &amp; professional paint — all makes &amp; models.
+              {settings.hero_subtitle || 'Over 20 years restoring vehicles to factory condition. Collision repair, dent removal, bumper repair, headlight restoration & professional paint — all makes & models.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Link
                 to="/contact"
                 className="whitespace-nowrap bg-[#2db84b] hover:bg-[#25a040] text-white font-bold px-8 py-4 rounded-full text-base transition-all duration-200 cursor-pointer text-center"
               >
-                Get Your Estimate Today
+                {settings.hero_cta_primary || 'Get Your Estimate Today'}
               </Link>
               <Link
                 to="/services"
                 className="whitespace-nowrap bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-8 py-4 rounded-full text-base transition-all duration-200 cursor-pointer text-center"
               >
-                View Our Work
+                {settings.hero_cta_secondary || 'View Our Work'}
               </Link>
             </div>
             <div className="flex flex-wrap gap-8">
@@ -162,9 +163,9 @@ export default function HeroSection() {
             <div className="bg-[#0d0d0d]/90 backdrop-blur-sm border border-[#2db84b]/30 rounded-2xl p-8">
               <div className="mb-6 pb-5 border-b border-white/10">
                 <h2 className="text-white text-2xl font-extrabold leading-snug">
-                  Get Your <span className="text-[#2db84b]">Estimate</span> Today <span className="text-yellow-400">👇</span>
+                  {settings.hero_form_title || 'Get Your'} <span className="text-[#2db84b]">Estimate</span> Today <span className="text-yellow-400">👇</span>
                 </h2>
-                <p className="text-gray-400 text-sm mt-1">No obligation — we&apos;ll call you back fast</p>
+                <p className="text-gray-400 text-sm mt-1">{settings.hero_form_subtitle || "No obligation — we'll call you back fast"}</p>
               </div>
 
               {submitStatus === 'success' ? (

@@ -4,6 +4,7 @@ import Home from "../pages/home/page";
 import About from "../pages/about/page";
 import Services from "../pages/services/page";
 import Contact from "../pages/contact/page";
+import OwnerPanel from "../pages/owner/page";
 
 const routes: RouteObject[] = [
   {
@@ -21,6 +22,10 @@ const routes: RouteObject[] = [
   {
     path: "/contact",
     element: <Contact />,
+  },
+  {
+    path: "/owner",
+    element: <OwnerPanel />,
   },
   {
     path: "*",

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useSiteData } from '@/hooks/useSiteData';
 
 export default function CTASection() {
+  const { settings } = useSiteData();
   return (
     <section className="relative py-24 overflow-hidden mb-16">
       <div className="absolute inset-0">
@@ -12,25 +14,25 @@ export default function CTASection() {
         <div className="absolute inset-0 bg-[#0d0d0d]/85"></div>
       </div>
       <div className="relative z-10 max-w-3xl mx-auto px-4 md:px-6 text-center">
-        <span className="text-[#2db84b] text-sm font-semibold uppercase tracking-widest">Ready to Restore Your Vehicle?</span>
+        <span className="text-[#2db84b] text-sm font-semibold uppercase tracking-widest">{settings.cta_title || 'Ready to Restore Your Vehicle?'}</span>
         <h2 className="text-4xl md:text-5xl font-extrabold text-white mt-3 leading-tight">
-          Let&apos;s Make It Look <span className="text-[#2db84b]">Like New Again</span>
+          {settings.cta_subtitle || "Let's Make It Look Like New Again"}
         </h2>
         <p className="text-gray-300 mt-5 text-lg leading-relaxed">
-          From a small dent to a full collision repair — we&apos;re here to make it happen. Contact us today and get your estimate.
+          {settings.cta_body || "From a small dent to a full collision repair — we're here to make it happen. Contact us today and get your estimate."}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <Link
             to="/contact"
             className="whitespace-nowrap bg-[#2db84b] hover:bg-[#25a040] text-white font-bold px-10 py-4 rounded-full text-base transition-colors cursor-pointer"
           >
-            Get Your Estimate Today
+            {settings.cta_button_text || 'Get Your Estimate Today'}
           </Link>
           <a
-            href="tel:+19195321509"
+            href="tel:+19195324509"
             className="whitespace-nowrap bg-white/10 hover:bg-white/20 border border-[#cc2200]/60 text-white font-bold px-10 py-4 rounded-full text-base transition-colors cursor-pointer flex items-center justify-center gap-2"
           >
-            <i className="ri-phone-line text-[#cc2200]"></i>(919) 532-1509
+            <i className="ri-phone-line text-[#cc2200]"></i>(919) 532-4509
           </a>
         </div>
       </div>

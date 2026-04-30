@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSiteData } from '@/hooks/useSiteData';
 
 const CLIENT_VIDEO_URL = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7d1896c7-1fc8-458b-93d6-aa39402109ba_4324242.mp4?v=a02ffddf69245d7acd59cd30ac1e6927';
 
-const bars = [
-  { label: 'Customer Satisfaction Rate', value: 99, display: '99%' },
-  { label: 'Paint Quality Standards', value: 100, display: '100%' },
-  { label: 'On-Time Delivery Rate', value: 97, display: '97%' },
-  { label: 'Client Referral Rate', value: 96, display: '96%' },
-];
-
 export default function PerformanceSection() {
+  const { performanceBars } = useSiteData();
+  const bars = performanceBars.length > 0 ? performanceBars : [
+    { id: '1', label: 'Customer Satisfaction Rate', value: 99, display: '99%', display_order: 1 },
+    { id: '2', label: 'Paint Quality Standards', value: 100, display: '100%', display_order: 2 },
+    { id: '3', label: 'On-Time Delivery Rate', value: 97, display: '97%', display_order: 3 },
+    { id: '4', label: 'Client Referral Rate', value: 96, display: '96%', display_order: 4 },
+  ];
   const [animated, setAnimated] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showControls, setShowControls] = useState(false);
@@ -95,7 +96,7 @@ export default function PerformanceSection() {
           </p>
           <div className="space-y-5">
             {bars.map((bar) => (
-              <div key={bar.label}>
+              <div key={bar.id}>
                 <div className="flex justify-between items-center mb-1.5">
                   <span className="text-xs font-bold uppercase tracking-widest text-gray-300">{bar.label}</span>
                   <span className="text-sm font-extrabold text-[#2db84b]">{bar.display}</span>

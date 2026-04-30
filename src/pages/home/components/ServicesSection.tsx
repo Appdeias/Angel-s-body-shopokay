@@ -1,30 +1,25 @@
 import { Link } from 'react-router-dom';
+import { useSiteData } from '@/hooks/useSiteData';
 
-const serviceCards = [
-  {
-    img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2',
-    alt: "Collision Repair Angel's Paint & Autobody",
-    icon: 'ri-car-line',
-    title: 'Collision Repair',
-    desc: 'Complete collision and accident repair — structural restoration, panel replacement, and full vehicle reconstruction back to pre-accident condition.',
-  },
-  {
-    img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785',
-    alt: 'Professional Auto Paint Job',
-    icon: 'ri-paint-brush-line',
-    title: 'Professional Paint',
-    desc: 'Perfect color matching, flawless clear coat application, and spot or full vehicle paint jobs that last. Every detail counts for us.',
-  },
-  {
-    img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966',
-    alt: 'Dent Removal & Bumper Repair',
-    icon: 'ri-tools-line',
-    title: 'Dent & Bumper Repair',
-    desc: 'Expert dent removal, bumper repair, and minor damage restoration — making your vehicle look like the accident never happened.',
-  },
+const fallbackCards = [
+  { img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2', alt: "Collision Repair Angel's Paint & Autobody", icon: 'ri-car-line', title: 'Collision Repair', desc: 'Complete collision and accident repair — structural restoration, panel replacement, and full vehicle reconstruction back to pre-accident condition.' },
+  { img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785', alt: 'Professional Auto Paint Job', icon: 'ri-paint-brush-line', title: 'Professional Paint', desc: 'Perfect color matching, flawless clear coat application, and spot or full vehicle paint jobs that last. Every detail counts for us.' },
+  { img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966', alt: 'Dent Removal & Bumper Repair', icon: 'ri-tools-line', title: 'Dent & Bumper Repair', desc: 'Expert dent removal, bumper repair, and minor damage restoration — making your vehicle look like the accident never happened.' },
 ];
 
 export default function ServicesSection() {
+  const { services: dbServices } = useSiteData();
+  const allServices = dbServices.length > 0 ? dbServices.filter((s) => s.is_active) : [];
+  const serviceCards = allServices.length > 0
+    ? allServices.slice(0, 3).map((s) => ({
+        img: s.image_url || 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2',
+        alt: s.title,
+        icon: s.icon,
+        title: s.title,
+        desc: s.description,
+      }))
+    : fallbackCards;
+
   return (
     <section className="py-20 bg-[#0d0d0d]">
       <div className="max-w-7xl mx-auto px-4 md:px-6">

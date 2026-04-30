@@ -1,3 +1,5 @@
+import { useSiteData } from '@/hooks/useSiteData';
+
 const steps = [
   {
     icon: 'ri-customer-service-2-line',
@@ -22,6 +24,14 @@ const steps = [
 ];
 
 export default function HowItWorksSection() {
+  const { howItWorks } = useSiteData();
+  const steps = howItWorks.length > 0 ? howItWorks : [
+    { id: '1', title: 'Get Your Estimate', description: 'Bring your vehicle in or call us. We assess the damage, listen to your needs, and provide a detailed, no-obligation estimate.', icon: 'ri-customer-service-2-line', display_order: 1 },
+    { id: '2', title: 'Insurance Coordination', description: 'We work directly with your insurance company to handle the paperwork and approvals, making the process stress-free for you.', icon: 'ri-file-list-3-line', display_order: 2 },
+    { id: '3', title: 'Expert Repair & Paint', description: 'Our skilled technicians restore your vehicle with precision — structural repair, bodywork, and a flawless paint finish.', icon: 'ri-tools-line', display_order: 3 },
+    { id: '4', title: 'Final Inspection', description: 'Before delivery, we do a thorough quality check to ensure every detail is perfect. Your vehicle leaves looking like new.', icon: 'ri-checkbox-circle-line', display_order: 4 },
+  ];
+
   return (
     <section className="py-20 bg-[#111111]">
       <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
@@ -34,7 +44,7 @@ export default function HowItWorksSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, i) => (
             <div
-              key={i}
+              key={step.id}
               className="group relative bg-[#1a1a1a] border border-white/5 hover:border-[#2db84b]/30 rounded-2xl px-6 py-8 text-center flex flex-col items-center cursor-pointer transition-all duration-300"
             >
               <div className="w-14 h-14 flex items-center justify-center rounded-full mb-4 mt-2 bg-[#2db84b]/15 group-hover:bg-[#2db84b]/25 transition-colors">
@@ -44,7 +54,7 @@ export default function HowItWorksSection() {
                 {i + 1}
               </div>
               <h3 className="font-bold text-base mb-2 text-white">{step.title}</h3>
-              <p className="text-sm leading-relaxed text-gray-400">{step.desc}</p>
+              <p className="text-sm leading-relaxed text-gray-400">{step.description}</p>
             </div>
           ))}
         </div>

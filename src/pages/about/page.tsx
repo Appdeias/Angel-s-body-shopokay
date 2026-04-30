@@ -1,52 +1,21 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/pages/home/components/Navbar';
 import Footer from '@/pages/home/components/Footer';
-
-const faqs = [
-  {
-    question: 'What types of auto body services do you offer?',
-    answer:
-      'We offer a full range of auto body services including collision repair, dent and abolladura removal, bumper repair, full and spot paint jobs, clear coat application, color matching, headlight restoration, rim painting, and complete vehicle restoration to pre-accident condition.',
-  },
-  {
-    question: 'How long does a typical repair take?',
-    answer:
-      'Repair times vary depending on the extent of the damage. Minor dent removal can be done in a day, while full collision repairs may take 3–7 business days. We always provide a clear timeline upfront and keep you updated throughout the process.',
-  },
-  {
-    question: 'Do you work with insurance companies?',
-    answer:
-      'Yes! We work with most major insurance companies and can help coordinate the claims process for you. We handle the paperwork and communication so you can focus on getting back on the road.',
-  },
-  {
-    question: 'How do I get an estimate?',
-    answer:
-      'Easy — just bring your vehicle in or call us at (919) 532-1509 and we\'ll assess the damage and provide a detailed quote. No pressure, no commitment.',
-  },
-  {
-    question: 'Do you serve Spanish-speaking customers?',
-    answer:
-      'Yes! Our team is fully bilingual (English & Spanish). We are proud to serve our Spanish-speaking community and ensure clear communication throughout the entire repair process.',
-  },
-  {
-    question: 'What makes Angel\'s Paint & Autobody different?',
-    answer:
-      'With over 20 years of experience, we combine expert craftsmanship with honest pricing and personalized service. We treat every vehicle as if it were our own — with attention to every detail, from structural repair to the final paint finish.',
-  },
-];
-
-const values = [
-  { icon: 'ri-price-tag-3-line', label: 'Competitive & Honest Pricing' },
-  { icon: 'ri-customer-service-2-line', label: 'Professional Service' },
-  { icon: 'ri-shield-check-line', label: 'Quality Guaranteed' },
-  { icon: 'ri-user-heart-line', label: 'Family-Owned & Trusted' },
-  { icon: 'ri-translate-2', label: 'Bilingual Team (English / Spanish)' },
-  { icon: 'ri-car-line', label: 'All Makes & Models Accepted' },
-];
+import { useSiteData } from '@/hooks/useSiteData';
 
 export default function AboutPage() {
+  const { settings, faqs, companyValues } = useSiteData();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -80,13 +49,13 @@ export default function AboutPage() {
               <div className="flex-1">
                 <span className="text-[#2db84b] text-xs font-bold uppercase tracking-widest">OUR STORY</span>
                 <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-3 leading-tight">
-                  Zebulon&apos;s Trusted Auto Body &amp; Paint Specialists for 20+ Years
+                  {settings.about_section_title || "Zebulon's Trusted Auto Body & Paint Specialists for 20+ Years"}
                 </h2>
                 <p className="text-gray-400 mt-5 text-sm leading-relaxed">
-                  Angel&apos;s Paint &amp; Autobody was founded with a clear mission: to restore vehicles to their factory condition with honesty, precision, and care. What started as a family-driven operation has grown into a trusted auto body shop serving Zebulon and surrounding areas of North Carolina for over two decades.
+                  {settings.about_body_1 || "Angel's Paint & Autobody was founded with a clear mission: to restore vehicles to their factory condition with honesty, precision, and care. What started as a family-driven operation has grown into a trusted auto body shop serving Zebulon and surrounding areas of North Carolina for over two decades."}
                 </p>
                 <p className="text-gray-400 mt-4 text-sm leading-relaxed">
-                  We take the time to understand what each customer truly needs, offering tailored repair solutions that fit both their vehicle and their budget. From collision repairs and structural restoration to professional paint jobs and headlight restoration, every vehicle is handled with the same level of dedication. Our bilingual team (English &amp; Spanish) ensures clear communication with every client.
+                  {settings.about_body_2 || "We take the time to understand what each customer truly needs, offering tailored repair solutions that fit both their vehicle and their budget. From collision repairs and structural restoration to professional paint jobs and headlight restoration, every vehicle is handled with the same level of dedication. Our bilingual team (English & Spanish) ensures clear communication with every client."}
                 </p>
                 <div className="mt-8 flex items-center gap-6">
                   <div>
@@ -95,38 +64,45 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 mt-10">
-                  <div className="flex flex-col items-center justify-center gap-2 bg-[#111111] rounded-2xl px-4 py-6 text-center cursor-default hover:bg-[#c0392b] transition-colors">
-                    <div className="w-10 h-10 flex items-center justify-center bg-[#e8b84b]/20 rounded-full mb-1">
-                      <i className="ri-calendar-check-line text-[#2db84b] text-xl"></i>
+                  {[
+                    { icon: 'ri-calendar-check-line', value: settings.stat_years_value || '20+', label: settings.stat_years_label || 'Years in Business' },
+                    { icon: 'ri-car-line', value: settings.stat_cars_value || '1000+', label: settings.stat_cars_label || 'Cars Restored' },
+                    { icon: 'ri-medal-line', value: settings.stat_satisfaction_value || '100%', label: settings.stat_satisfaction_label || 'Satisfaction' },
+                  ].map((s) => (
+                    <div className="flex flex-col items-center justify-center gap-2 bg-[#111111] rounded-2xl px-4 py-6 text-center cursor-default hover:bg-[#c0392b] transition-colors">
+                      <div className="w-10 h-10 flex items-center justify-center bg-[#e8b84b]/20 rounded-full mb-1">
+                        <i className={`${s.icon} text-[#2db84b] text-xl`}></i>
+                      </div>
+                      <p className="text-3xl font-extrabold text-white leading-none">{s.value}</p>
+                      <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest mt-1">{s.label}</p>
                     </div>
-                    <p className="text-3xl font-extrabold text-white leading-none">20+</p>
-                    <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest mt-1">Years in Business</p>
-                  </div>
-                  <div className="flex flex-col items-center justify-center gap-2 bg-[#111111] rounded-2xl px-4 py-6 text-center cursor-default hover:bg-[#c0392b] transition-colors">
-                    <div className="w-10 h-10 flex items-center justify-center bg-[#e8b84b]/20 rounded-full mb-1">
-                      <i className="ri-car-line text-[#2db84b] text-xl"></i>
-                    </div>
-                    <p className="text-3xl font-extrabold text-white leading-none">1000+</p>
-                    <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest mt-1">Cars Restored</p>
-                  </div>
-                  <div className="flex flex-col items-center justify-center gap-2 bg-[#111111] rounded-2xl px-4 py-6 text-center cursor-default hover:bg-[#c0392b] transition-colors">
-                    <div className="w-10 h-10 flex items-center justify-center bg-[#e8b84b]/20 rounded-full mb-1">
-                      <i className="ri-medal-line text-[#2db84b] text-xl"></i>
-                    </div>
-                    <p className="text-3xl font-extrabold text-white leading-none">100%</p>
-                    <p className="text-[#2db84b] text-xs font-semibold uppercase tracking-widest mt-1">Satisfaction</p>
-                  </div>
+                  ))}
                 </div>
               </div>
               <div className="flex-1 flex justify-center">
                 <div className="relative">
                   <div className="absolute -top-4 -right-4 w-full h-full bg-[#2db84b]/10 rounded-2xl"></div>
                   <div className="relative w-[380px] h-[480px] rounded-2xl overflow-hidden">
-                    <img
-                      alt="Angel's Paint & Autobody team professional auto body Zebulon NC"
-                      className="w-full h-full object-cover object-top"
-                      src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2"
+                    <video
+                      ref={videoRef}
+                      muted={false}
+                      playsInline
+                      preload="metadata"
+                      aria-label="Angel's Paint & Autobody shop video"
+                      className="w-full h-full object-cover object-center"
+                      src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/e2caf9a1-26a5-4761-b082-84d1cd945e77_Video-Project-145.mp4?v=c7f57c5ba59c75f818102b15fd3f2750"
                     />
+                    {!isPlaying && (
+                      <button
+                        onClick={handlePlay}
+                        className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer group"
+                        aria-label="Play video"
+                      >
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-[#2db84b] rounded-full flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg">
+                          <i className="ri-play-fill text-white text-3xl md:text-4xl"></i>
+                        </div>
+                      </button>
+                    )}
                   </div>
                   <div className="absolute -bottom-4 -left-4 bg-[#2db84b] text-white rounded-xl px-5 py-3 text-center">
                     <p className="text-xs font-semibold uppercase tracking-widest text-white/80">Est.</p>
@@ -164,10 +140,10 @@ export default function AboutPage() {
                 Talk To Our Team <i className="ri-arrow-right-line"></i>
               </Link>
               <a
-                href="tel:+19195321509"
+                href="tel:+19195324509"
                 className="inline-flex items-center gap-2 whitespace-nowrap bg-white/10 hover:bg-white/20 border border-[#cc2200]/50 text-white font-bold px-10 py-4 rounded-full transition-all cursor-pointer hover:scale-105"
               >
-                <i className="ri-phone-line"></i>(919) 532-1509
+                <i className="ri-phone-line"></i>(919) 532-4509
               </a>
             </div>
           </div>
@@ -187,7 +163,7 @@ export default function AboutPage() {
               <div className="mt-8 space-y-3">
                 {faqs.map((faq, i) => (
                   <div
-                    key={i}
+                    key={faq.id}
                     className="rounded-xl overflow-hidden border border-white/10 transition-all duration-300 cursor-pointer"
                   >
                     <button
@@ -247,8 +223,8 @@ export default function AboutPage() {
                 Every auto body shop can promise great results, but what truly defines us is how we work. At Angel&apos;s Paint &amp; Autobody, our foundation is built on a set of core values that guide every decision, every interaction, and every vehicle we restore.
               </p>
               <ul className="mt-7 space-y-2">
-                {values.map((v, i) => (
-                  <li key={i} className="cursor-default">
+                {companyValues.map((v) => (
+                  <li key={v.id} className="cursor-default">
                     <div className="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-[#e8b84b]/10 transition-colors">
                       <div className="w-9 h-9 flex items-center justify-center bg-[#e8b84b]/20 rounded-lg flex-shrink-0">
                         <i className={`${v.icon} text-[#2db84b] text-base`}></i>

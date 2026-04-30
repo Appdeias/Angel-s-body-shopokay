@@ -27,10 +27,10 @@ export default function FreeConsultationBanner() {
             <i className="ri-message-3-line"></i>Talk To Our Team
           </Link>
           <a
-            href="tel:+19195321509"
+            href="tel:+19195324509"
             className="whitespace-nowrap bg-white/10 hover:bg-white/20 border border-[#2db84b]/70 text-white font-bold px-8 py-4 rounded-full text-sm transition-all cursor-pointer flex items-center gap-2"
           >
-            <i className="ri-phone-line text-[#2db84b]"></i>(919) 532-1509
+            <i className="ri-phone-line text-[#2db84b]"></i>(919) 532-4509
           </a>
         </div>
       </div>
