@@ -6,6 +6,7 @@ import FreeConsultationBanner from './components/FreeConsultationBanner';
 import ServicesSection from './components/ServicesSection';
 import PerformanceSection from './components/PerformanceSection';
 import HowItWorksSection from './components/HowItWorksSection';
+import ReviewsSection from './components/ReviewsSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 
@@ -21,6 +22,7 @@ export default function Home() {
         <ServicesSection />
         <PerformanceSection />
         <HowItWorksSection />
+        <ReviewsSection />
         <CTASection />
       </main>
       <Footer />

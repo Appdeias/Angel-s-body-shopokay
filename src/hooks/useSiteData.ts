@@ -8,6 +8,8 @@ import {
   mockCompanyValues,
   mockPerformanceBars,
 } from '@/mocks/siteData';
+import { mockReviews } from '@/mocks/reviews';
+import type { Review } from '@/mocks/reviews';
 
 export interface Service {
   id: string;
@@ -63,6 +65,7 @@ interface SiteData {
   howItWorks: HowItWorksStep[];
   companyValues: CompanyValue[];
   performanceBars: PerformanceBar[];
+  reviews: Review[];
   loading: boolean;
   error: string | null;
 }
@@ -75,6 +78,7 @@ export function useSiteData(): SiteData & { refresh: () => void } {
     howItWorks: mockHowItWorks,
     companyValues: mockCompanyValues,
     performanceBars: mockPerformanceBars,
+    reviews: mockReviews,
     loading: true,
     error: null,
   });
@@ -89,6 +93,7 @@ export function useSiteData(): SiteData & { refresh: () => void } {
         howItWorksRes,
         valuesRes,
         performanceRes,
+        reviewsRes,
       ] = await Promise.all([
         supabase.from('site_settings').select('*').order('key'),
         supabase.from('services').select('*').order('display_order', { ascending: true }),
@@ -96,6 +101,7 @@ export function useSiteData(): SiteData & { refresh: () => void } {
         supabase.from('how_it_works').select('*').order('display_order', { ascending: true }),
         supabase.from('company_values').select('*').order('display_order', { ascending: true }),
         supabase.from('performance_bars').select('*').order('display_order', { ascending: true }),
+        supabase.from('reviews').select('*').order('display_order', { ascending: true }),
       ]);
 
       const settings: SiteSettings = { ...mockSiteSettings };
@@ -107,11 +113,12 @@ export function useSiteData(): SiteData & { refresh: () => void } {
 
       setData({
         settings,
-        services: servicesRes.data && !servicesRes.error ? servicesRes.data : mockServices,
-        faqs: faqsRes.data && !faqsRes.error ? faqsRes.data : mockFaqs,
-        howItWorks: howItWorksRes.data && !howItWorksRes.error ? howItWorksRes.data : mockHowItWorks,
-        companyValues: valuesRes.data && !valuesRes.error ? valuesRes.data : mockCompanyValues,
-        performanceBars: performanceRes.data && !performanceRes.error ? performanceRes.data : mockPerformanceBars,
+        services: (servicesRes.data && !servicesRes.error && (servicesRes.data as unknown[]).length > 0) ? servicesRes.data : mockServices,
+        faqs: (faqsRes.data && !faqsRes.error && (faqsRes.data as unknown[]).length > 0) ? faqsRes.data : mockFaqs,
+        howItWorks: (howItWorksRes.data && !howItWorksRes.error && (howItWorksRes.data as unknown[]).length > 0) ? howItWorksRes.data : mockHowItWorks,
+        companyValues: (valuesRes.data && !valuesRes.error && (valuesRes.data as unknown[]).length > 0) ? valuesRes.data : mockCompanyValues,
+        performanceBars: (performanceRes.data && !performanceRes.error && (performanceRes.data as unknown[]).length > 0) ? performanceRes.data : mockPerformanceBars,
+        reviews: (reviewsRes.data && !reviewsRes.error && (reviewsRes.data as unknown[]).length > 0) ? (reviewsRes.data as Review[]) : mockReviews,
         loading: false,
         error: null,
       });

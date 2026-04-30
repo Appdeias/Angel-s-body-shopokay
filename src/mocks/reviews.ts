@@ -1,0 +1,133 @@
+export interface Review {
+  id: string;
+  name: string;
+  rating: number;
+  text: string;
+  service: string;
+  created_at: string;
+  is_active: boolean;
+  display_order: number;
+}
+
+export const mockReviews: Review[] = [
+  {
+    id: '1',
+    name: 'Maria G.',
+    rating: 5,
+    text: 'Amazing work on my Honda after the accident! You can not even tell it was ever damaged. The paint match is perfect and the team was so professional. Highly recommend to anyone in Zebulon!',
+    service: 'Collision Repair',
+    created_at: '2026-03-15T10:00:00Z',
+    is_active: true,
+    display_order: 1,
+  },
+  {
+    id: '2',
+    name: 'Jose R.',
+    rating: 5,
+    text: 'They fixed a big dent on my truck door and it looks brand new. The price was fair and they finished faster than they promised. Great bilingual service too — my family always comes here now.',
+    service: 'Dent Removal',
+    created_at: '2026-03-10T14:30:00Z',
+    is_active: true,
+    display_order: 2,
+  },
+  {
+    id: '3',
+    name: 'Jennifer M.',
+    rating: 5,
+    text: 'I needed a full paint job on my old Camry and they made it look like it just came out of the dealership. The color match was spot on and the clear coat finish is beautiful. Worth every penny!',
+    service: 'Full Paint Job',
+    created_at: '2026-02-28T09:15:00Z',
+    is_active: true,
+    display_order: 3,
+  },
+  {
+    id: '4',
+    name: 'Carlos D.',
+    rating: 5,
+    text: 'My bumper was completely cracked after a fender bender. Angel\'s team replaced it, painted it, and matched the color perfectly. Super honest pricing and no hidden fees. Five stars!',
+    service: 'Bumper Repair',
+    created_at: '2026-02-20T16:00:00Z',
+    is_active: true,
+    display_order: 4,
+  },
+  {
+    id: '5',
+    name: 'Amanda S.',
+    rating: 4,
+    text: 'Had my headlights restored and the difference is incredible — they went from yellow and cloudy to crystal clear. Much safer driving at night now. Quick service and friendly staff.',
+    service: 'Headlight Restoration',
+    created_at: '2026-02-15T11:45:00Z',
+    is_active: true,
+    display_order: 5,
+  },
+  {
+    id: '6',
+    name: 'Luis T.',
+    rating: 5,
+    text: 'Best auto body shop in Wake County, hands down. They handled my insurance claim from start to finish and my car looks better than before the accident. The whole family trusts Angel\'s now.',
+    service: 'Collision Repair',
+    created_at: '2026-02-05T13:20:00Z',
+    is_active: true,
+    display_order: 6,
+  },
+  {
+    id: '7',
+    name: 'Patricia H.',
+    rating: 5,
+    text: 'Spot paint repair on my door scratch — completely invisible now! I was worried you would see the difference but it blends perfectly. Fast turnaround and they even detailed the car. Amazing!',
+    service: 'Spot Paint Repair',
+    created_at: '2026-01-25T10:00:00Z',
+    is_active: true,
+    display_order: 7,
+  },
+  {
+    id: '8',
+    name: 'Roberto F.',
+    rating: 5,
+    text: 'Got my rims painted matte black and they look sick! The finish is smooth, no bubbles, no runs — professional quality. Already getting compliments everywhere I go. Will be back for sure.',
+    service: 'Rim Painting',
+    created_at: '2026-01-18T15:30:00Z',
+    is_active: true,
+    display_order: 8,
+  },
+  {
+    id: '9',
+    name: 'Sandra K.',
+    rating: 5,
+    text: 'After a bad rear-end collision, I thought my car was done for. Angel\'s not only fixed the frame damage but restored the entire back end. It drives straight, looks perfect, and they warranty the work. True professionals.',
+    service: 'Structural Repair',
+    created_at: '2026-01-10T09:45:00Z',
+    is_active: true,
+    display_order: 9,
+  },
+  {
+    id: '10',
+    name: 'Daniel P.',
+    rating: 5,
+    text: 'Full vehicle restoration after a side swipe. They replaced two panels, repainted half the car, and the color match is flawless. Insurance covered everything and the process was stress-free. Thank you Angel\'s team!',
+    service: 'Full Vehicle Restoration',
+    created_at: '2025-12-28T14:00:00Z',
+    is_active: true,
+    display_order: 10,
+  },
+  {
+    id: '11',
+    name: 'Elena V.',
+    rating: 5,
+    text: 'I have been bringing my cars here for years. Whether it is a small dent or major body work, they always deliver top quality. The bilingual service makes everything so much easier for my parents too. Five stars every time!',
+    service: 'Dent Removal',
+    created_at: '2025-12-20T11:00:00Z',
+    is_active: true,
+    display_order: 11,
+  },
+  {
+    id: '12',
+    name: 'Michael B.',
+    rating: 5,
+    text: 'They repainted my whole SUV after hail damage. The paint is deep and glossy, no orange peel, no imperfections. They also helped me with the insurance claim. Best body shop experience I have ever had.',
+    service: 'Full Paint Job',
+    created_at: '2025-12-15T16:30:00Z',
+    is_active: true,
+    display_order: 12,
+  },
+];
