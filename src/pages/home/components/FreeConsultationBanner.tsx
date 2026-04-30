@@ -1,13 +1,25 @@
 import { Link } from 'react-router-dom';
+import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
+
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const FALLBACK_IMAGE = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785';
 
 export default function FreeConsultationBanner() {
+  const { media } = useSiteData();
+  const imageSrc = getMediaUrl(media, 'home', 'consultation_banner') || FALLBACK_IMAGE;
+
   return (
     <section className="relative py-20 overflow-hidden">
       <div className="absolute inset-0">
         <img
           alt="Get your auto body estimate Angel's Paint & Autobody Zebulon NC"
           className="w-full h-full object-cover object-center"
-          src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785"
+          src={imageSrc}
         />
         <div className="absolute inset-0 bg-black/70"></div>
       </div>

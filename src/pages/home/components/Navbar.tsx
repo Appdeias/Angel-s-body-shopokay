@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
 
-const LOGO = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const LOGO_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,7 +19,9 @@ export default function Navbar() {
   const [loginError, setLoginError] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const { settings } = useSiteData();
+  const { settings, media } = useSiteData();
+
+  const logoUrl = getMediaUrl(media, 'brand', 'logo') || LOGO_FALLBACK;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -51,7 +59,7 @@ export default function Navbar() {
               <img
                 alt="Angel's Paint & Autobody"
                 className="h-20 w-auto object-contain rounded-lg"
-                src={LOGO}
+                src={logoUrl}
               />
             </Link>
 
@@ -151,7 +159,7 @@ export default function Navbar() {
               <img
                 alt="Angel's Paint & Autobody"
                 className="h-16 w-auto object-contain"
-                src={LOGO}
+                src={logoUrl}
               />
             </div>
             <h3 className="text-xl font-extrabold text-white text-center mb-1">Owner Portal</h3>

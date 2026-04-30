@@ -1,16 +1,24 @@
 import { Link } from 'react-router-dom';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
 
-const LOGO = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const LOGO_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
 
 export default function Footer() {
-  const { settings, services: dbServices } = useSiteData();
+  const { settings, services: dbServices, media } = useSiteData();
   const serviceList = dbServices.length > 0
     ? dbServices.filter((s) => s.is_active).map((s) => s.title)
     : [
         'Collision Repair', 'Dent Removal', 'Bumper Repair', 'Full Paint Job',
         'Spot Paint Repair', 'Headlight Restoration', 'Rim Painting', 'Full Vehicle Restoration',
       ];
+
+  const logoUrl = getMediaUrl(media, 'brand', 'logo') || LOGO_FALLBACK;
 
   return (
     <footer className="bg-[#0d0d0d] text-white border-t border-[#2db84b]/30">
@@ -20,7 +28,7 @@ export default function Footer() {
             <img
               alt="Angel's Paint & Autobody"
               className="h-16 w-auto object-contain mb-4 rounded-lg"
-              src={LOGO}
+              src={logoUrl}
             />
             <p className="text-gray-400 text-sm leading-relaxed">
               {settings.company_tagline || "Professional auto body & paint services in Zebulon, North Carolina. Quality craftsmanship for over 20 years."}

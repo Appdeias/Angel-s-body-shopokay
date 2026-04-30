@@ -2,6 +2,16 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/pages/home/components/Navbar';
 import Footer from '@/pages/home/components/Footer';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
+
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const HERO_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7cdab340-3876-4225-9a64-2193c2721fc9_freepik_camera-orbits-around-and-_2820358579.mp4?v=bc541642eb95bb92648aa233a32faf68';
+const MID_BANNER_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345';
+const BOTTOM_BANNER_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966';
 
 const fallbackServices = [
   {
@@ -124,7 +134,7 @@ function ServiceCard({ title, icon, description, video_url }: { title: string; i
 }
 
 export default function ServicesPage() {
-  const { services: dbServices } = useSiteData();
+  const { services: dbServices, media } = useSiteData();
   const services = dbServices.length > 0
     ? dbServices.filter((s) => s.is_active).map((s) => ({
         title: s.title,
@@ -138,6 +148,10 @@ export default function ServicesPage() {
         description: s.description,
         video_url: s.video_url,
       }));
+
+  const heroVideo = getMediaUrl(media, 'services_page', 'hero_video') || HERO_FALLBACK;
+  const midBanner = getMediaUrl(media, 'services_page', 'mid_banner') || MID_BANNER_FALLBACK;
+  const bottomBanner = getMediaUrl(media, 'services_page', 'bottom_banner') || BOTTOM_BANNER_FALLBACK;
 
   const topHalf = services.slice(0, Math.ceil(services.length / 2));
   const bottomHalf = services.slice(Math.ceil(services.length / 2));
@@ -156,7 +170,7 @@ export default function ServicesPage() {
               playsInline
               aria-label="Angel's Paint & Autobody auto body services Zebulon NC"
               className="w-full h-full object-cover object-center"
-              src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7cdab340-3876-4225-9a64-2193c2721fc9_freepik_camera-orbits-around-and-_2820358579.mp4?v=bc541642eb95bb92648aa233a32faf68"
+              src={heroVideo}
             />
             <div className="absolute inset-0 bg-[#111111]/75"></div>
           </div>
@@ -193,7 +207,7 @@ export default function ServicesPage() {
             <img
               alt="Request an auto body estimate Angel's Paint & Autobody"
               className="w-full h-full object-cover object-top"
-              src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345"
+              src={midBanner}
             />
             <div className="absolute inset-0 bg-[#111111]/80"></div>
           </div>
@@ -230,7 +244,7 @@ export default function ServicesPage() {
             <img
               alt="Ready to restore your vehicle with Angel's Paint & Autobody"
               className="w-full h-full object-cover object-top"
-              src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966"
+              src={bottomBanner}
             />
             <div className="absolute inset-0 bg-[#111111]/75"></div>
           </div>

@@ -7,6 +7,7 @@ import {
   mockHowItWorks,
   mockCompanyValues,
   mockPerformanceBars,
+  mockMedia,
 } from '@/mocks/siteData';
 import { mockReviews } from '@/mocks/reviews';
 import type { Review } from '@/mocks/reviews';
@@ -54,6 +55,16 @@ export interface PerformanceBar {
   display_order: number;
 }
 
+export interface MediaItem {
+  id: string;
+  section: string;
+  slot: string;
+  url: string;
+  type: string;
+  label: string;
+  is_active: boolean;
+}
+
 export interface SiteSettings {
   [key: string]: string;
 }
@@ -66,6 +77,7 @@ interface SiteData {
   companyValues: CompanyValue[];
   performanceBars: PerformanceBar[];
   reviews: Review[];
+  media: MediaItem[];
   loading: boolean;
   error: string | null;
 }
@@ -79,6 +91,7 @@ export function useSiteData(): SiteData & { refresh: () => void } {
     companyValues: mockCompanyValues,
     performanceBars: mockPerformanceBars,
     reviews: mockReviews,
+    media: mockMedia,
     loading: true,
     error: null,
   });
@@ -94,6 +107,7 @@ export function useSiteData(): SiteData & { refresh: () => void } {
         valuesRes,
         performanceRes,
         reviewsRes,
+        mediaRes,
       ] = await Promise.all([
         supabase.from('site_settings').select('*').order('key'),
         supabase.from('services').select('*').order('display_order', { ascending: true }),
@@ -102,6 +116,7 @@ export function useSiteData(): SiteData & { refresh: () => void } {
         supabase.from('company_values').select('*').order('display_order', { ascending: true }),
         supabase.from('performance_bars').select('*').order('display_order', { ascending: true }),
         supabase.from('reviews').select('*').order('display_order', { ascending: true }),
+        supabase.from('site_media').select('*').order('display_order', { ascending: true }),
       ]);
 
       const settings: SiteSettings = { ...mockSiteSettings };
@@ -119,6 +134,7 @@ export function useSiteData(): SiteData & { refresh: () => void } {
         companyValues: (valuesRes.data && !valuesRes.error && (valuesRes.data as unknown[]).length > 0) ? valuesRes.data : mockCompanyValues,
         performanceBars: (performanceRes.data && !performanceRes.error && (performanceRes.data as unknown[]).length > 0) ? performanceRes.data : mockPerformanceBars,
         reviews: (reviewsRes.data && !reviewsRes.error && (reviewsRes.data as unknown[]).length > 0) ? (reviewsRes.data as Review[]) : mockReviews,
+        media: (mediaRes.data && !mediaRes.error && (mediaRes.data as unknown[]).length > 0) ? (mediaRes.data as MediaItem[]) : mockMedia,
         loading: false,
         error: null,
       });

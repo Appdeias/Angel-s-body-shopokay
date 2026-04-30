@@ -3,12 +3,30 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/pages/home/components/Navbar';
 import Footer from '@/pages/home/components/Footer';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
+
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const ABOUT_HERO_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/d8b81372-fec2-4d73-88f7-09bcc0f15ee6_freepik_camera-orbits-around-and-_2820339083.mp4?v=6aa85fd325eed65d0bee4fd98b5444df';
+const STORY_VIDEO_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/e2caf9a1-26a5-4761-b082-84d1cd945e77_Video-Project-145.mp4?v=c7f57c5ba59c75f818102b15fd3f2750';
+const ESTIMATE_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785';
+const FAQ_IMAGE_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966';
+const VALUES_IMAGE_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345';
 
 export default function AboutPage() {
-  const { settings, faqs, companyValues } = useSiteData();
+  const { settings, faqs, companyValues, media } = useSiteData();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const aboutHeroVideo = getMediaUrl(media, 'about_page', 'hero_video') || ABOUT_HERO_FALLBACK;
+  const storyVideo = getMediaUrl(media, 'about_page', 'story_video') || STORY_VIDEO_FALLBACK;
+  const estimateBanner = getMediaUrl(media, 'about_page', 'estimate_banner') || ESTIMATE_FALLBACK;
+  const faqImage = getMediaUrl(media, 'about_page', 'faq_image') || FAQ_IMAGE_FALLBACK;
+  const valuesImage = getMediaUrl(media, 'about_page', 'values_image') || VALUES_IMAGE_FALLBACK;
 
   const handlePlay = () => {
     if (videoRef.current) {
@@ -31,7 +49,7 @@ export default function AboutPage() {
               playsInline
               aria-label="About Angel's Paint & Autobody auto body shop Zebulon NC"
               className="w-full h-full object-cover object-center"
-              src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/d8b81372-fec2-4d73-88f7-09bcc0f15ee6_freepik_camera-orbits-around-and-_2820339083.mp4?v=6aa85fd325eed65d0bee4fd98b5444df"
+              src={aboutHeroVideo}
             />
             <div className="absolute inset-0 bg-[#111111]/75"></div>
           </div>
@@ -90,7 +108,7 @@ export default function AboutPage() {
                       preload="metadata"
                       aria-label="Angel's Paint & Autobody shop video"
                       className="w-full h-full object-cover object-center"
-                      src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/e2caf9a1-26a5-4761-b082-84d1cd945e77_Video-Project-145.mp4?v=c7f57c5ba59c75f818102b15fd3f2750"
+                      src={storyVideo}
                     />
                     {!isPlaying && (
                       <button
@@ -121,7 +139,7 @@ export default function AboutPage() {
             <img
               alt="Auto body estimate Angel's Paint & Autobody"
               className="w-full h-full object-cover object-center"
-              src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785"
+              src={estimateBanner}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/60 to-black/65"></div>
           </div>
@@ -191,7 +209,7 @@ export default function AboutPage() {
                 <img
                   alt="Angel's Paint & Autobody auto body repair results"
                   className="w-full h-full object-cover object-top"
-                  src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966"
+                  src={faqImage}
                 />
               </div>
             </div>
@@ -206,7 +224,7 @@ export default function AboutPage() {
                 <img
                   alt="Angel's Paint & Autobody real auto body project Zebulon NC"
                   className="w-full h-full object-cover object-center"
-                  src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345"
+                  src={valuesImage}
                 />
                 <div className="absolute bottom-5 left-5 bg-[#111111]/90 text-white rounded-xl px-5 py-3 backdrop-blur-sm">
                   <p className="text-xs text-[#2db84b] font-bold uppercase tracking-widest">Real Project</p>

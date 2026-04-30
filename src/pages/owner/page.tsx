@@ -8,11 +8,12 @@ import HowItWorksManager from './components/HowItWorksManager';
 import ValuesManager from './components/ValuesManager';
 import PerformanceManager from './components/PerformanceManager';
 import ReviewsManager from './components/ReviewsManager';
+import MediaManager from './components/MediaManager';
 import { supabase } from '@/lib/supabase';
 
 const LOGO = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
 
-type Tab = 'hero' | 'stats' | 'about' | 'cta' | 'contact' | 'services' | 'faqs' | 'howitworks' | 'values' | 'performance' | 'reviews';
+type Tab = 'hero' | 'stats' | 'about' | 'cta' | 'contact' | 'services' | 'faqs' | 'howitworks' | 'values' | 'performance' | 'reviews' | 'media';
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: 'hero', label: 'Hero & Stats', icon: 'ri-home-4-line' },
@@ -25,6 +26,7 @@ const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: 'values', label: 'Our Values', icon: 'ri-heart-3-line' },
   { id: 'performance', label: 'Performance', icon: 'ri-bar-chart-2-line' },
   { id: 'reviews', label: 'Reviews', icon: 'ri-star-line' },
+  { id: 'media', label: 'Media', icon: 'ri-image-line' },
 ];
 
 export default function OwnerPanel() {
@@ -226,6 +228,7 @@ export default function OwnerPanel() {
           {activeTab === 'values' && <ValuesManager />}
           {activeTab === 'performance' && <PerformanceManager />}
           {activeTab === 'reviews' && <ReviewsManager />}
+          {activeTab === 'media' && <MediaManager />}
         </main>
       </div>
 

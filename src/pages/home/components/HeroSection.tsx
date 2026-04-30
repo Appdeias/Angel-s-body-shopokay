@@ -1,34 +1,46 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSiteData } from '@/hooks/useSiteData';
-
-const heroVideos = [
-  'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/68362ed4-620c-4087-9f36-29db22ec9c9f_4234324.mp4?v=51689215013bc6086565cb1f9c159b96',
-];
-
-const heroImages = [
-  'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/5fc89146-88d8-4b2a-92b9-69ef9ad5d823_freepik_me-encanta-esta-foto-pero_2845512436-1-1.png?v=2e3caf3efaa0b3fcdd9c91627abb8789',
-  'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2',
-  'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785',
-];
+import type { MediaItem } from '@/hooks/useSiteData';
 
 const FORM_URL = 'https://readdy.ai/api/form/d7klsf767esg4j665a7g';
 
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
 export default function HeroSection() {
-  const { settings } = useSiteData();
+  const { settings, media } = useSiteData();
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [useVideo, setUseVideo] = useState(true);
   const [imgCurrent, setImgCurrent] = useState(0);
 
+  // Build media arrays from database
+  const heroVideo = getMediaUrl(media, 'hero', 'video');
+  const heroImages = [
+    getMediaUrl(media, 'hero', 'image_1'),
+    getMediaUrl(media, 'hero', 'image_2'),
+    getMediaUrl(media, 'hero', 'image_3'),
+  ].filter(Boolean) as string[];
+
+  // Fallbacks if no media in database
+  const videoSrc = heroVideo || 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/68362ed4-620c-4087-9f36-29db22ec9c9f_4234324.mp4?v=51689215013bc6086565cb1f9c159b96';
+  const imageSources = heroImages.length > 0 ? heroImages : [
+    'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/5fc89146-88d8-4b2a-92b9-69ef9ad5d823_freepik_me-encanta-esta-foto-pero_2845512436-1-1.png?v=2e3caf3efaa0b3fcdd9c91627abb8789',
+    'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2',
+    'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785',
+  ];
+
   useEffect(() => {
     if (!useVideo) {
       const timer = setInterval(() => {
-        setImgCurrent((prev) => (prev + 1) % heroImages.length);
+        setImgCurrent((prev) => (prev + 1) % imageSources.length);
       }, 5000);
       return () => clearInterval(timer);
     }
-  }, [useVideo]);
+  }, [useVideo, imageSources.length]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -64,7 +76,7 @@ export default function HeroSection() {
         <div className="absolute inset-0">
           <video
             ref={videoRef}
-            src={heroVideos[0]}
+            src={videoSrc}
             autoPlay
             muted
             loop
@@ -76,7 +88,7 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d0d]/95 via-[#0d0d0d]/75 to-[#0d0d0d]/40"></div>
         </div>
       ) : (
-        heroImages.map((img, i) => (
+        imageSources.map((img, i) => (
           <div
             key={i}
             className={`absolute inset-0 transition-opacity duration-700 ${i === imgCurrent ? 'opacity-100' : 'opacity-0'}`}
@@ -92,19 +104,19 @@ export default function HeroSection() {
           <button
             className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-[#2db84b]/60 border border-white/20 rounded-full text-white transition-all duration-200 cursor-pointer"
             aria-label="Previous slide"
-            onClick={() => setImgCurrent((prev) => (prev - 1 + heroImages.length) % heroImages.length)}
+            onClick={() => setImgCurrent((prev) => (prev - 1 + imageSources.length) % imageSources.length)}
           >
             <i className="ri-arrow-left-s-line text-xl"></i>
           </button>
           <button
             className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-[#2db84b]/60 border border-white/20 rounded-full text-white transition-all duration-200 cursor-pointer"
             aria-label="Next slide"
-            onClick={() => setImgCurrent((prev) => (prev + 1) % heroImages.length)}
+            onClick={() => setImgCurrent((prev) => (prev + 1) % imageSources.length)}
           >
             <i className="ri-arrow-right-s-line text-xl"></i>
           </button>
           <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-            {heroImages.map((_, i) => (
+            {imageSources.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setImgCurrent(i)}

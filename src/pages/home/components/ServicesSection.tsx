@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
+
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
 
 const fallbackCards = [
   { img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2', alt: "Collision Repair Angel's Paint & Autobody", icon: 'ri-car-line', title: 'Collision Repair', desc: 'Complete collision and accident repair — structural restoration, panel replacement, and full vehicle reconstruction back to pre-accident condition.' },
@@ -7,18 +13,29 @@ const fallbackCards = [
   { img: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966', alt: 'Dent Removal & Bumper Repair', icon: 'ri-tools-line', title: 'Dent & Bumper Repair', desc: 'Expert dent removal, bumper repair, and minor damage restoration — making your vehicle look like the accident never happened.' },
 ];
 
+const fallbackBanner = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345';
+
 export default function ServicesSection() {
-  const { services: dbServices } = useSiteData();
+  const { services: dbServices, media } = useSiteData();
   const allServices = dbServices.length > 0 ? dbServices.filter((s) => s.is_active) : [];
+
+  // Build card images from database media — always use distinct images per slot
+  const card1Img = getMediaUrl(media, 'services', 'card_1');
+  const card2Img = getMediaUrl(media, 'services', 'card_2');
+  const card3Img = getMediaUrl(media, 'services', 'card_3');
+
   const serviceCards = allServices.length > 0
-    ? allServices.slice(0, 3).map((s) => ({
-        img: s.image_url || 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2',
+    ? allServices.slice(0, 3).map((s, i) => ({
+        img: [card1Img, card2Img, card3Img][i] || s.image_url || fallbackCards[i].img,
         alt: s.title,
         icon: s.icon,
         title: s.title,
         desc: s.description,
       }))
-    : fallbackCards;
+    : fallbackCards.map((c, i) => ({
+        ...c,
+        img: [card1Img, card2Img, card3Img][i] || c.img,
+      }));
 
   return (
     <section className="py-20 bg-[#0d0d0d]">
@@ -47,7 +64,7 @@ export default function ServicesSection() {
               <img
                 alt="Angel's Paint & Autobody professional auto body work"
                 className="w-full h-full object-cover object-center"
-                src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345"
+                src={getMediaUrl(media, 'services', 'banner_image') || fallbackBanner}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
             </div>

@@ -1,15 +1,25 @@
 import { Link } from 'react-router-dom';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
+
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const FALLBACK_IMAGE = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966';
 
 export default function CTASection() {
-  const { settings } = useSiteData();
+  const { settings, media } = useSiteData();
+  const imageSrc = getMediaUrl(media, 'home', 'cta_banner') || FALLBACK_IMAGE;
+
   return (
     <section className="relative py-24 overflow-hidden mb-16">
       <div className="absolute inset-0">
         <img
           alt="Angel's Paint & Autobody auto body repair results Zebulon NC"
           className="w-full h-full object-cover object-center"
-          src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966"
+          src={imageSrc}
         />
         <div className="absolute inset-0 bg-[#0d0d0d]/85"></div>
       </div>

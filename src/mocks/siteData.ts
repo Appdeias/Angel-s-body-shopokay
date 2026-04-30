@@ -93,3 +93,15 @@ export const mockPerformanceBars = [
   { id: '3', label: 'On-Time Delivery Rate', value: 97, display: '97%', display_order: 3 },
   { id: '4', label: 'Client Referral Rate', value: 96, display: '96%', display_order: 4 },
 ];
+
+export const mockMedia = [
+  { id: '1', section: 'hero', slot: 'video', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/68362ed4-620c-4087-9f36-29db22ec9c9f_4234324.mp4?v=51689215013bc6086565cb1f9c159b96', type: 'video', label: 'Hero Background Video', is_active: true },
+  { id: '2', section: 'hero', slot: 'image_1', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/5fc89146-88d8-4b2a-92b9-69ef9ad5d823_freepik_me-encanta-esta-foto-pero_2845512436-1-1.png?v=2e3caf3efaa0b3fcdd9c91627abb8789', type: 'image', label: 'Hero Image 1', is_active: true },
+  { id: '3', section: 'hero', slot: 'image_2', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2', type: 'image', label: 'Hero Image 2', is_active: true },
+  { id: '4', section: 'hero', slot: 'image_3', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785', type: 'image', label: 'Hero Image 3', is_active: true },
+  { id: '5', section: 'about', slot: 'main_image', url: 'https://public.readdy.ai/ai/img_res/a5b2de65-7e82-420d-927e-ad1c7feca951.png', type: 'image', label: 'About Us Image', is_active: true },
+  { id: '6', section: 'services', slot: 'banner_image', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b502f7e5-c110-4d8c-b45e-e5c884114ed5_306008280_943527826567514_1764423820803857818_n.jpg?v=375cc226bd3191296429f0751e52e345', type: 'image', label: 'Services Banner', is_active: true },
+  { id: '7', section: 'services', slot: 'card_1', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2', type: 'image', label: 'Service Card 1', is_active: true },
+  { id: '8', section: 'services', slot: 'card_2', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785', type: 'image', label: 'Service Card 2', is_active: true },
+  { id: '9', section: 'services', slot: 'card_3', url: 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/479a4b2f-56ed-48bf-88e9-4606d10552fb_471793784_1108256547423137_2076007239816172139_n.jpg?v=1c3bf58f09b7d34e6aef28d7dff99966', type: 'image', label: 'Service Card 3', is_active: true },
+];

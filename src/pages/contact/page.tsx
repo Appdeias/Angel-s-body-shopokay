@@ -2,12 +2,21 @@ import { useState, useRef } from 'react';
 import Navbar from '@/pages/home/components/Navbar';
 import Footer from '@/pages/home/components/Footer';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
 
-const LOGO = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const LOGO_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
 const FORM_URL = 'https://readdy.ai/api/form/d7klsf767esg4j665a80';
+const HERO_VIDEO_FALLBACK = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/ccdfcd3f-40de-42b6-8a3d-d9462bac3f0c_freepik_camera-orbits-around-and-_2820339219.mp4?v=02f62e0c92a16b015201b27e502a266b';
 
 export default function ContactPage() {
-  const { settings } = useSiteData();
+  const { settings, media } = useSiteData();
+  const logoUrl = getMediaUrl(media, 'brand', 'logo') || LOGO_FALLBACK;
+  const heroVideo = getMediaUrl(media, 'contact', 'hero_video') || HERO_VIDEO_FALLBACK;
   const [charCount, setCharCount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -70,7 +79,7 @@ export default function ContactPage() {
               playsInline
               aria-label="Contact Angel's Paint & Autobody Zebulon North Carolina"
               className="w-full h-full object-cover object-center"
-              src="https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/ccdfcd3f-40de-42b6-8a3d-d9462bac3f0c_freepik_camera-orbits-around-and-_2820339219.mp4?v=02f62e0c92a16b015201b27e502a266b"
+              src={heroVideo}
             />
             <div className="absolute inset-0 bg-[#111111]/75"></div>
           </div>
@@ -136,7 +145,7 @@ export default function ContactPage() {
                   <img
                     alt="Angel's Paint & Autobody Logo"
                     className="w-36 h-auto object-contain mb-6 rounded-xl"
-                    src={LOGO}
+                    src={logoUrl}
                   />
                   <h2 className="text-white text-xl font-extrabold leading-snug">
                     Angel&apos;s Paint &amp;<br /><span className="text-[#e8b84b]">Autobody</span>

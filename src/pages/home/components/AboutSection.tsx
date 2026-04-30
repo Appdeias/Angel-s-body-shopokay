@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
+
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
 
 const features = [
   { icon: 'ri-shield-check-line', label: 'Licensed & Insured' },
@@ -9,7 +15,7 @@ const features = [
 ];
 
 export default function AboutSection() {
-  const { settings } = useSiteData();
+  const { settings, media } = useSiteData();
 
   return (
     <section className="py-20 bg-[#111111] overflow-hidden">
@@ -21,7 +27,7 @@ export default function AboutSection() {
                 alt="Angel's Paint & Autobody collision repair Zebulon NC"
                 className="w-full h-auto object-contain object-top"
                 style={{ maxHeight: '600px' }}
-                src="https://public.readdy.ai/ai/img_res/a5b2de65-7e82-420d-927e-ad1c7feca951.png"
+                src={getMediaUrl(media, 'about', 'main_image') || 'https://public.readdy.ai/ai/img_res/a5b2de65-7e82-420d-927e-ad1c7feca951.png'}
               />
               <div className="absolute bottom-6 left-6 bg-[#0d0d0d] border border-[#2db84b]/40 text-white px-5 py-4 rounded-xl">
                 <p className="text-3xl font-extrabold text-[#2db84b]">20+</p>

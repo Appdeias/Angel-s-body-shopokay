@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSiteData } from '@/hooks/useSiteData';
+import type { MediaItem } from '@/hooks/useSiteData';
 
-const CLIENT_VIDEO_URL = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7d1896c7-1fc8-458b-93d6-aa39402109ba_4324242.mp4?v=a02ffddf69245d7acd59cd30ac1e6927';
+function getMediaUrl(media: MediaItem[], section: string, slot: string): string | null {
+  const item = media.find((m) => m.section === section && m.slot === slot && m.is_active);
+  return item?.url || null;
+}
+
+const FALLBACK_VIDEO_URL = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/7d1896c7-1fc8-458b-93d6-aa39402109ba_4324242.mp4?v=a02ffddf69245d7acd59cd30ac1e6927';
 
 export default function PerformanceSection() {
-  const { performanceBars } = useSiteData();
+  const { performanceBars, media } = useSiteData();
+  const videoSrc = getMediaUrl(media, 'home', 'performance_video') || FALLBACK_VIDEO_URL;
   const bars = performanceBars.length > 0 ? performanceBars : [
     { id: '1', label: 'Customer Satisfaction Rate', value: 99, display: '99%', display_order: 1 },
     { id: '2', label: 'Paint Quality Standards', value: 100, display: '100%', display_order: 2 },
@@ -53,7 +60,7 @@ export default function PerformanceSection() {
         >
           <video
             ref={videoRef}
-            src={CLIENT_VIDEO_URL}
+            src={videoSrc}
             className="w-full h-full object-cover object-center"
             playsInline
             onEnded={() => setIsPlaying(false)}
