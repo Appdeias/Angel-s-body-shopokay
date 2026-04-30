@@ -2,6 +2,21 @@ import { useState, useEffect } from 'react';
 import { useSiteData } from '@/hooks/useSiteData';
 import { mockReviews } from '@/mocks/reviews';
 
+function formatReviewDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  const now = new Date('2026-04-30');
+  const diffMs = now.getTime() - date.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 1) return 'Today';
+  if (diffDays === 1) return 'Yesterday';
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
+
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
 function GoogleGLogo({ className = '' }: { className?: string }) {
   return (
     <svg
@@ -94,7 +109,7 @@ export default function ReviewsSection() {
             </div>
             <div className="w-px h-10 bg-white/10"></div>
             <div className="text-left">
-              <p className="text-white font-bold text-lg">{activeReviews.length}</p>
+              <p className="text-white font-bold text-lg">40+</p>
               <p className="text-gray-500 text-xs">verified reviews</p>
             </div>
           </div>
@@ -139,7 +154,7 @@ export default function ReviewsSection() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-white text-sm font-semibold">{review.name}</p>
-                  <p className="text-gray-500 text-xs">Verified Customer</p>
+                  <p className="text-gray-500 text-xs">Verified Customer · {formatReviewDate(review.created_at)}</p>
                 </div>
               </div>
             </div>
