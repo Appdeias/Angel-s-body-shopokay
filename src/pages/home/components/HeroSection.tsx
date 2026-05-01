@@ -14,7 +14,7 @@ export default function HeroSection() {
   const { settings, media } = useSiteData();
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [useVideo, setUseVideo] = useState(true);
+  const [useVideo, setUseVideo] = useState(false);
   const [imgCurrent, setImgCurrent] = useState(0);
 
   // Build media arrays from database
@@ -26,11 +26,11 @@ export default function HeroSection() {
   ].filter(Boolean) as string[];
 
   // Fallbacks if no media in database
-  const videoSrc = heroVideo || 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/68362ed4-620c-4087-9f36-29db22ec9c9f_4234324.mp4?v=51689215013bc6086565cb1f9c159b96';
+  const videoSrc = heroVideo || '';
   const imageSources = heroImages.length > 0 ? heroImages : [
-    'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/5fc89146-88d8-4b2a-92b9-69ef9ad5d823_freepik_me-encanta-esta-foto-pero_2845512436-1-1.png?v=2e3caf3efaa0b3fcdd9c91627abb8789',
-    'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/b85bb5f2-8fb2-4e0f-b5e6-f3784c5f8c64_118211229_173432190905582_8198741353319176477_n.jpg?v=13f5e322e0000dbf776343767629b8a2',
-    'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/43b6bcbb-95e9-486f-a402-9339ffe94cc8_118159696_173432227572245_3778595294164800613_n.jpg?v=21d87e1c792f9d33e20abae9bced6785',
+    'https://readdy.ai/api/search-image?query=Professional%20auto%20body%20repair%20workshop%20interior%20with%20modern%20equipment%2C%20clean%20organized%20workspace%2C%20spray%20painting%20booth%20with%20bright%20lighting%2C%20cars%20being%20restored%20in%20a%20premium%20garage%20environment%2C%20cinematic%20wide%20shot%2C%20dark%20moody%20atmosphere%20with%20dramatic%20lighting%2C%20high%20end%20automotive%20shop%2C%20sharp%20details&width=1920&height=1080&seq=102&orientation=landscape',
+    'https://readdy.ai/api/search-image?query=Luxury%20car%20with%20flawless%20glossy%20paint%20finish%20after%20professional%20collision%20repair%2C%20parked%20inside%20a%20modern%20auto%20body%20shop%2C%20bright%20LED%20lights%20reflecting%20on%20perfect%20paint%20surface%2C%20dark%20charcoal%20and%20green%20color%20palette%2C%20wide%20angle%20cinematic%20composition%2C%20premium%20automotive%20photography&width=1920&height=1080&seq=103&orientation=landscape',
+    'https://readdy.ai/api/search-image?query=Auto%20body%20technician%20spray%20painting%20a%20car%20panel%20in%20a%20professional%20paint%20booth%2C%20wearing%20protective%20gear%2C%20dramatic%20backlighting%20with%20green%20and%20dark%20tones%2C%20professional%20automotive%20workshop%20atmosphere%2C%20sharp%20focus%20on%20painting%20process%2C%20cinematic%20photography%20style&width=1920&height=1080&seq=104&orientation=landscape',
   ];
 
   useEffect(() => {
@@ -43,10 +43,12 @@ export default function HeroSection() {
   }, [useVideo, imageSources.length]);
 
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && videoSrc) {
       videoRef.current.play().catch(() => setUseVideo(false));
+    } else if (!videoSrc) {
+      setUseVideo(false);
     }
-  }, []);
+  }, [videoSrc]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -11,7 +11,7 @@ import ReviewsManager from './components/ReviewsManager';
 import MediaManager from './components/MediaManager';
 import { supabase } from '@/lib/supabase';
 
-const LOGO = 'https://storage.readdy-site.link/project_files/ff9960ac-0204-486f-8a01-cc3ae9bf753b/9609bc3b-0aa0-443e-8520-8dfcf0ad1b8d_WhatsApp-Image-2026-04-18-at-11.57.37-AM-1.png?v=f52a13492fc7a7aafc58abb343ad34f6';
+const LOGO = 'https://readdy.ai/api/search-image?query=Professional%20automotive%20auto%20body%20shop%20logo%20with%20a%20sleek%20car%20silhouette%20and%20paint%20spray%20elements%2C%20dark%20charcoal%20background%20with%20bright%20green%20accents%2C%20modern%20minimalist%20design%2C%20clean%20bold%20typography%20reading%20Angels%20Paint%20and%20Autobody%2C%20vector%20style%20illustration%2C%20high%20contrast%2C%20corporate%20branding&width=240&height=80&seq=101&orientation=landscape';
 
 type Tab = 'hero' | 'stats' | 'about' | 'cta' | 'contact' | 'services' | 'faqs' | 'howitworks' | 'values' | 'performance' | 'reviews' | 'media';
 
